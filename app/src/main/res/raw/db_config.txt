@@ -1,0 +1,271 @@
+#
+# generated on 2015/02/03 04:31:56
+#
+# --table-start--
+dataClass=com.mlsdev.weather.model.Snow
+tableName=snow
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=levelOfPrecipitation
+columnName=levelOfPrecipitation
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.mlsdev.weather.model.Temperature
+tableName=temperature
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=temp
+columnName=temp
+# --field-end--
+# --field-start--
+fieldName=humidity
+columnName=humidity
+# --field-end--
+# --field-start--
+fieldName=minTemp
+columnName=minTemp
+# --field-end--
+# --field-start--
+fieldName=maxTemp
+columnName=maxTemp
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.mlsdev.weather.model.DayTemp
+tableName=dayTemp
+# --table-fields-start--
+# --field-start--
+fieldName=detailDayTemp
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=date
+columnName=date
+# --field-end--
+# --field-start--
+fieldName=speed
+columnName=speed
+# --field-end--
+# --field-start--
+fieldName=clouds
+columnName=clouds
+# --field-end--
+# --field-start--
+fieldName=rain
+columnName=rain
+# --field-end--
+# --field-start--
+fieldName=snow
+columnName=snow
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.mlsdev.weather.model.Clouds
+tableName=clouds
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=cloudiness
+columnName=cloudiness
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.mlsdev.weather.model.Wind
+tableName=wind
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=speed
+columnName=speed
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.mlsdev.weather.model.Sys
+tableName=sys
+# --table-fields-start--
+# --field-start--
+fieldName=id
+id=true
+# --field-end--
+# --field-start--
+fieldName=country
+columnName=country
+# --field-end--
+# --field-start--
+fieldName=sunrise
+columnName=sunrise
+# --field-end--
+# --field-start--
+fieldName=sunset
+columnName=sunset
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.mlsdev.weather.model.Weather
+tableName=weather
+# --table-fields-start--
+# --field-start--
+fieldName=id
+id=true
+# --field-end--
+# --field-start--
+fieldName=city
+columnName=city
+# --field-end--
+# --field-start--
+fieldName=weatherTime
+columnName=weatherTime
+# --field-end--
+# --field-start--
+fieldName=coordinates
+foreign=true
+foreignAutoRefresh=true
+columnDefinition=integer references coord(id) on delete cascade
+# --field-end--
+# --field-start--
+fieldName=sys
+foreign=true
+foreignAutoRefresh=true
+columnDefinition=integer references sys(id) on delete cascade
+# --field-end--
+# --field-start--
+fieldName=temperature
+foreign=true
+foreignAutoRefresh=true
+columnDefinition=integer references main(id) on delete cascade
+# --field-end--
+# --field-start--
+fieldName=wind
+foreign=true
+foreignAutoRefresh=true
+columnDefinition=integer references wind(id) on delete cascade
+# --field-end--
+# --field-start--
+fieldName=clouds
+foreign=true
+foreignAutoRefresh=true
+columnDefinition=integer references clouds(id) on delete cascade
+# --field-end--
+# --field-start--
+fieldName=weather
+dataPersister=SERIALIZABLE
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.mlsdev.weather.model.Description
+tableName=description
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=main
+columnName=main
+# --field-end--
+# --field-start--
+fieldName=description
+columnName=description
+# --field-end--
+# --field-start--
+fieldName=icon
+columnName=icon
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.mlsdev.weather.model.Coordinates
+tableName=coordinates
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=lon
+columnName=lon
+# --field-end--
+# --field-start--
+fieldName=lat
+columnName=lat
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.mlsdev.weather.model.DetailDayTemp
+tableName=detailDayTemp
+# --table-fields-start--
+# --field-start--
+fieldName=day
+columnName=day
+# --field-end--
+# --field-start--
+fieldName=min
+columnName=min
+# --field-end--
+# --field-start--
+fieldName=max
+columnName=max
+# --field-end--
+# --field-start--
+fieldName=night
+columnName=night
+# --field-end--
+# --field-start--
+fieldName=eve
+columnName=eve
+# --field-end--
+# --field-start--
+fieldName=morn
+columnName=morn
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.mlsdev.weather.model.Rain
+tableName=rain
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=levelOfPrecipitation
+columnName=levelOfPrecipitation
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
