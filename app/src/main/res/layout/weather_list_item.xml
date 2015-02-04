@@ -6,6 +6,7 @@
     android:background="@drawable/weather_item_border"
     android:padding="10dp">
 
+
     <ImageView
         android:id="@+id/iv_weather"
         android:layout_width="150dp"
@@ -89,4 +90,13 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" />
+
+    <CheckBox
+        android:id="@+id/cb_delete_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:visibility="gone" />
 </RelativeLayout>
