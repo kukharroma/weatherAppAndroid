@@ -8,6 +8,12 @@
 
     <string name="degree">7°C</string>
 
+
+    <string name="enter_city_name">Enter city name</string>
+    <string name="add_new_city">Add new city</string>
+    <string name="progress_bar_load_weather">Loading weather</string>
+    <string name="progress_bar_wait">Wait...</string>
+
     <string name="action_settings">Settings</string>
     <string name="add_item">Add</string>
     <string name="delete_item">Delete</string>

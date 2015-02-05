@@ -7,9 +7,9 @@ import java.util.List;
  */
 public interface IWeatherNetworkService {
 
-    public void getWeatherByCityName(String cityName);
+    public void getWeatherByCity(String cityName);
 
-    public void getWeatherByCitiesName(List<String> citiesList);
+    public void getWeatherByCities(List<String> citiesList);
 
     public void getWeatherById(int id);
 
