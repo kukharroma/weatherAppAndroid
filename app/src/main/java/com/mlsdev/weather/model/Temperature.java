@@ -15,35 +15,19 @@ public class Temperature {
 
     @DatabaseField(columnName = "temp")
     @SerializedName("temp")
-    private String temp;
+    private double temp;
 
     @DatabaseField(columnName = "humidity")
     @SerializedName("humidity")
-    private int humidity;
+    private String humidity;
 
     @DatabaseField(columnName = "minTemp")
     @SerializedName("temp_min")
-    private int minTemp;
+    private double minTemp;
 
     @DatabaseField(columnName = "maxTemp")
     @SerializedName("temp_max")
-    private int maxTemp;
-
-    public int getMinTemp() {
-        return minTemp;
-    }
-
-    public int getMaxTemp() {
-        return maxTemp;
-    }
-
-    public void setMinTemp(int minTemp) {
-        this.minTemp = minTemp;
-    }
-
-    public void setMaxTemp(int maxTemp) {
-        this.maxTemp = maxTemp;
-    }
+    private double maxTemp;
 
     public int getId() {
         return id;
@@ -53,19 +37,35 @@ public class Temperature {
         this.id = id;
     }
 
-    public String getTemp() {
+    public double getTemp() {
         return temp;
     }
 
-    public void setTemp(String temp) {
+    public void setTemp(double temp) {
         this.temp = temp;
     }
 
-    public int getHumidity() {
+    public String getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(int humidity) {
+    public void setHumidity(String humidity) {
         this.humidity = humidity;
+    }
+
+    public double getMinTemp() {
+        return minTemp;
+    }
+
+    public void setMinTemp(double minTemp) {
+        this.minTemp = minTemp;
+    }
+
+    public double getMaxTemp() {
+        return maxTemp;
+    }
+
+    public void setMaxTemp(double maxTemp) {
+        this.maxTemp = maxTemp;
     }
 }

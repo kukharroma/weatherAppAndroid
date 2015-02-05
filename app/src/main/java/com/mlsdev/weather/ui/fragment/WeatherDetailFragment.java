@@ -46,12 +46,11 @@ public class WeatherDetailFragment extends Fragment {
         tvMainWeather = (TextView) view.findViewById(R.id.tv_detail_main_weather);
         tvMainWeatherDescription = (TextView) view.findViewById(R.id.tv_detail_weather_description);
         tvMinMaxtemp = (TextView) view.findViewById(R.id.tv_detail_min_max_temp);
-
     }
 
     private void fillComponents() {
         tvLocation.setText(weather.getCity() + " ," + weather.getSys().getCountry());
-        tvMainTemp.setText(weather.getTemperature().getTemp());
+        tvMainTemp.setText(String.valueOf(weather.getTemperature().getTemp()));
         tvMainWeather.setText(weather.getFirstWeater().getMain());
         tvMainWeatherDescription.setText(weather.getFirstWeater().getDescription());
         tvMinMaxtemp.setText(weather.getTemperature().getMinTemp() + " / " + weather.getTemperature().getMaxTemp());

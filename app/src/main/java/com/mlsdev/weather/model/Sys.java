@@ -11,7 +11,9 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "sys")
 public class Sys {
 
-    @DatabaseField(id = true)
+    @DatabaseField(generatedId = true, columnName = "idDB")
+    private int idDB;
+
     @SerializedName("id")
     private int id;
 
@@ -27,6 +29,13 @@ public class Sys {
     @SerializedName("sunset")
     private String sunset;
 
+    public int getIdDB() {
+        return idDB;
+    }
+
+    public void setIdDB(int idDB) {
+        this.idDB = idDB;
+    }
 
     public int getId() {
         return id;

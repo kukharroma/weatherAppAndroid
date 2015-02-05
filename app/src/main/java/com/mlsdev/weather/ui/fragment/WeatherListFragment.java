@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.services.impl.ServiceManager;
+import com.mlsdev.weather.services.impl.net.WeatherNetworkService;
 import com.mlsdev.weather.services.impl.net.listeners.IGetWeatherByCity;
 import com.mlsdev.weather.ui.adapters.WeatherItemAdapter;
 import com.mlsdev.weather.ui.dialogs.AddWeatherItemDialog;
@@ -32,8 +33,9 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
 
     private List<Weather> weatherList;
     private ListView lvWeather;
-
+    private WeatherItemAdapter adapter;
     private ProgressDialog progressDialog;
+    private AddWeatherItemDialog dialog;
 
     private static final int ADD_CITY_REQUEST_CODE = 1;
 
@@ -52,9 +54,9 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
     }
 
     private void initComponents(View view) {
+        lvWeather = (ListView) view.findViewById(R.id.lv_weather);
         if (!weatherList.isEmpty()) {
-            lvWeather = (ListView) view.findViewById(R.id.lv_weather);
-            WeatherItemAdapter adapter = new WeatherItemAdapter(getActivity(), weatherList, R.layout.weather_list_item);
+            adapter = new WeatherItemAdapter(getActivity(), weatherList, R.layout.weather_list_item);
             lvWeather.setAdapter(adapter);
 
             lvWeather.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -90,33 +92,47 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
     }
 
     private void showAddWeatherItemDialog() {
-        AddWeatherItemDialog dialog = new AddWeatherItemDialog();
+        dialog = new AddWeatherItemDialog();
         dialog.setTargetFragment(this, ADD_CITY_REQUEST_CODE);
         dialog.show(getFragmentManager(), "");
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case ADD_CITY_REQUEST_CODE:
-                if (resultCode == Activity.RESULT_OK) {
-                    ServiceManager.getWeatherNetworkService(getActivity()).getWeatherByCity(data.getStringExtra(AddWeatherItemDialog.CITY_NAME));
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case ADD_CITY_REQUEST_CODE:
+                    WeatherNetworkService weatherNetworkService = new WeatherNetworkService(this);
+                    weatherNetworkService.getWeatherByCity(data.getStringExtra(AddWeatherItemDialog.CITY_NAME));
                     progressDialog = new ProgressDialog(getActivity());
                     progressDialog.setCancelable(false);
                     progressDialog.setTitle(getString(R.string.progress_bar_load_weather));
                     progressDialog.setMessage(getString(R.string.progress_bar_wait));
                     progressDialog.show();
-                }
+                    break;
+            }
         }
     }
 
     @Override
     public void onSuccessGetWeatherByCity(Weather weather) {
+        weatherList.add(weather);
+        if (adapter == null) {
+            adapter = new WeatherItemAdapter(getActivity(), weatherList, R.layout.weather_list_item);
+            adapter.updateList(weatherList);
+            lvWeather.setAdapter(adapter);
+        } else {
+            adapter.updateList(weatherList);
+        }
+        ServiceManager.getWeatherService().saveWeather(weather);
         progressDialog.dismiss();
+        dialog.dismiss();
     }
 
     @Override
     public void onErrorGetWeatherByCity(String str) {
         progressDialog.dismiss();
+        dialog.dismiss();
+        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
     }
 }

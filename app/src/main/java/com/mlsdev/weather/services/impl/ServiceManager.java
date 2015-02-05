@@ -26,12 +26,12 @@ public class ServiceManager {
         return weatherService;
     }
 
-    public static WeatherNetworkService getWeatherNetworkService(Context context){
-        if(weatherNetworkService == null){
-            weatherNetworkService = new WeatherNetworkService();
-        }
-        return weatherNetworkService;
-    }
+//    public static WeatherNetworkService getWeatherNetworkService(Context context){
+//        if(weatherNetworkService == null){
+//            weatherNetworkService = new WeatherNetworkService(context);
+//        }
+//        return weatherNetworkService;
+//    }
 
 
 

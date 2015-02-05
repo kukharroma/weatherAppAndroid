@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@drawable/weather_item_border"
+
     android:padding="10dp">
 
 
@@ -20,10 +20,10 @@
         android:id="@+id/tv_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/iv_weather"
-        android:layout_toLeftOf="@+id/progressBar"
         android:layout_toRightOf="@+id/iv_weather"
-        android:layout_toStartOf="@+id/progressBar"
         android:gravity="right"
         android:text="London, GB"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -81,15 +81,15 @@
         android:text="broken clouds"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleInverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_weather_time"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+    <!--<ProgressBar-->
+    <!--android:id="@+id/progressBar"-->
+    <!--style="?android:attr/progressBarStyleInverse"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_above="@+id/tv_weather_time"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_alignParentTop="true" />-->
 
     <CheckBox
         android:id="@+id/cb_delete_weather"

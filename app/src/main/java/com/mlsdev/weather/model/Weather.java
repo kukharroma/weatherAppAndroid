@@ -31,23 +31,23 @@ public class Weather implements Parcelable {
     @SerializedName("dt")
     private String weatherTime;
 
-    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, columnDefinition = "integer references coord(id) on delete cascade")
+    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnDefinition = "integer references coord(id) on delete cascade")
     @SerializedName("coord")
     private Coordinates coordinates;
 
-    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, columnDefinition = "integer references sys(id) on delete cascade")
+    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnDefinition = "integer references sys(id) on delete cascade")
     @SerializedName("sys")
     private Sys sys;
 
-    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, columnDefinition = "integer references main(id) on delete cascade")
+    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnDefinition = "integer references main(id) on delete cascade")
     @SerializedName("main")
     private Temperature temperature;
 
-    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, columnDefinition = "integer references wind(id) on delete cascade")
+    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnDefinition = "integer references wind(id) on delete cascade")
     @SerializedName("wind")
     private Wind wind;
 
-    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, columnDefinition = "integer references clouds(id) on delete cascade")
+    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnDefinition = "integer references clouds(id) on delete cascade")
     @SerializedName("clouds")
     private Clouds clouds;
 
@@ -149,6 +149,11 @@ public class Weather implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
+    }
+
+
+    public void formttingParams() {
 
     }
 }

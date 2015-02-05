@@ -3,7 +3,7 @@
 
     <string name="shared_pref">shared_pref_weather_app</string>
 
-    <string name="db_name">weather_1.db</string>
+    <string name="db_name">weather_test5.db</string>
     <integer name="db_version">1</integer>
 
     <string name="degree">7°C</string>
