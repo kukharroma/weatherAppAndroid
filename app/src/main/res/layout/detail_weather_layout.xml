@@ -3,10 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/main_toolbar"
-        layout="@layout/app_toolbar_layout" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -32,27 +28,27 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clouds"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="Clouds"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="8.2°C / -2.2°C"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_below="@+id/textView5"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="8.2°C / -2.2°C"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="broken clouds"
-        android:id="@+id/textView5"
         android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="broken clouds"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

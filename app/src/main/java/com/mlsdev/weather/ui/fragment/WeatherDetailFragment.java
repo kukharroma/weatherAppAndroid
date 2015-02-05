@@ -3,11 +3,10 @@ package com.mlsdev.weather.ui.fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-
-import com.mlsdev.weather.ui.adapters.WeatherItemAdapter;
 
 import mlsdev.com.weather.R;
 
@@ -16,18 +15,20 @@ import mlsdev.com.weather.R;
  */
 public class WeatherDetailFragment extends Fragment {
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_weather_layout, container, false);
-
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.detail_weather_menu, menu);
     }
 }

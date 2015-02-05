@@ -3,10 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <include
-        android:id="@+id/main_toolbar"
-        layout="@layout/app_toolbar_layout" />
+    
 
     <ListView
         android:id="@+id/lv_weather"
