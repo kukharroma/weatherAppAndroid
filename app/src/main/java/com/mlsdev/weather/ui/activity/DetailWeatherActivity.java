@@ -3,9 +3,11 @@ package com.mlsdev.weather.ui.activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v13.app.FragmentStatePagerAdapter;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.services.impl.ServiceManager;
@@ -52,7 +54,7 @@ public class DetailWeatherActivity extends BaseActivity {
         return R.layout.detail_weather_container_layout;
     }
 
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+    private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
 
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
@@ -70,10 +72,10 @@ public class DetailWeatherActivity extends BaseActivity {
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.detail_weather_menu, menu);
-//        return true;
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.detail_weather_menu, menu);
+        return true;
+    }
 }

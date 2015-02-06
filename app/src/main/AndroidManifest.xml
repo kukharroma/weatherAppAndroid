@@ -14,7 +14,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.mlsdev.weather.ui.activity.DetailWeatherActivity"/>
+        <activity android:name="com.mlsdev.weather.ui.activity.DetailWeatherActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mlsdev.weather.ui.activity.MainActivity" />
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
