@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.ui.model.WeatherItem;
 
 import java.util.List;
@@ -77,7 +77,7 @@ public class WeatherItemAdapter extends BaseAdapter {
             cbDelete = viewHolder.cbDelete;
         }
 
-        WeatherItem item = weatherItemList.get(position);
+        final WeatherItem item = weatherItemList.get(position);
         ivWeather.setImageResource(R.drawable.weather_image);
         tvLocation.setText(item.getWeather().getCity() + ", " + item.getWeather().getSys().getCountry());
         tvMainTemp.setText(String.valueOf(item.getWeather().getTemperature().getTemp()) + context.getString(R.string.degree));
@@ -86,11 +86,35 @@ public class WeatherItemAdapter extends BaseAdapter {
         tvMainWeather.setText(item.getWeather().getFirstWeater().getMain());
         tvDescriptionWeather.setText(item.getWeather().getFirstWeater().getDescription());
 
+
         if (isShowCheckBox) {
             cbDelete.setVisibility(View.VISIBLE);
         } else {
             cbDelete.setVisibility(View.GONE);
         }
+
+        cbDelete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                cbDelete.setChecked(isChecked);
+                item.setEnabled(isChecked);
+            }
+        });
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cbDelete.isChecked()) {
+                    item.setEnabled(false);
+                    cbDelete.setChecked(item.isEnabled());
+                } else {
+                    item.setEnabled(true);
+                    cbDelete.setChecked(item.isEnabled());
+                }
+            }
+        });
+
+        cbDelete.setChecked(item.isEnabled());
 
         return convertView;
     }
