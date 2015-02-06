@@ -8,6 +8,9 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by romakukhar on 30.01.15.
  */
@@ -152,8 +155,9 @@ public class Weather implements Parcelable {
 
     }
 
-
-    public void formttingParams() {
-
+    public void formaParams() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM hh:mm");
+        this.weatherTime = formatter.format(new Date(Integer.parseInt(this.weatherTime)));
+        this.getTemperature().formattTemperature();
     }
 }

@@ -22,6 +22,7 @@ import java.util.Map;
 public class ServerRequest<T> extends Request<T> {
 
     private Gson gson = new Gson();
+
     private Class<T> clazz;
     private Map<String, String> params;
     private Response.Listener listener;
@@ -34,6 +35,7 @@ public class ServerRequest<T> extends Request<T> {
         this.clazz = clazz;
         this.params = params;
         this.listener = listener;
+
     }
 
     public ServerRequest(int method, String url, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
@@ -72,7 +74,7 @@ public class ServerRequest<T> extends Request<T> {
         return requestQueue;
     }
 
-    public static void init(Context context){
+    public static void init(Context context) {
         requestQueue = Volley.newRequestQueue(context);
     }
 }

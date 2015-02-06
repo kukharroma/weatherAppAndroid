@@ -32,13 +32,13 @@
         android:id="@+id/tv_main_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_location"
-        android:layout_centerHorizontal="true"
-        android:layout_toEndOf="@+id/iv_weather"
-        android:layout_toRightOf="@+id/iv_weather"
-        android:text="@string/degree"
+        android:text="@string/seveb_degree"
+        android:gravity="center"
+        android:textSize="25sp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="35sp" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/tv_min_max_temp"
+        android:layout_below="@+id/tv_location" />
 
     <TextView
         android:id="@+id/tv_weather_time"

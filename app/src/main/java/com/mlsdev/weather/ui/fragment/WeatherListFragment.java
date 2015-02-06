@@ -116,6 +116,8 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
 
     @Override
     public void onSuccessGetWeatherByCity(Weather weather) {
+        ServiceManager.getWeatherService().saveWeather(weather);
+
         weatherList.add(weather);
         if (adapter == null) {
             adapter = new WeatherItemAdapter(getActivity(), weatherList, R.layout.weather_list_item);
@@ -124,7 +126,6 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
         } else {
             adapter.updateList(weatherList);
         }
-        ServiceManager.getWeatherService().saveWeather(weather);
         progressDialog.dismiss();
         dialog.dismiss();
     }

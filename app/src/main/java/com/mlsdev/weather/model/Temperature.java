@@ -68,4 +68,10 @@ public class Temperature {
     public void setMaxTemp(double maxTemp) {
         this.maxTemp = maxTemp;
     }
+
+    public void formattTemperature() {
+        this.temp = (this.temp * 1e1) / 1e1;
+        this.minTemp = (this.minTemp * 1e1) / 1e1;
+        this.maxTemp = (this.maxTemp * 1e1) / 1e1;
+    }
 }

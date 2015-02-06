@@ -26,6 +26,7 @@ public class WeatherNetworkService implements IWeatherNetworkService {
     Response.Listener<Weather> successListener = new Response.Listener<Weather>() {
         @Override
         public void onResponse(Weather weather) {
+            weather.formaParams();
             action.onSuccessGetWeatherByCity(weather);
         }
     };

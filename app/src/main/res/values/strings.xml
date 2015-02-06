@@ -6,7 +6,8 @@
     <string name="db_name">weather_test5.db</string>
     <integer name="db_version">1</integer>
 
-    <string name="degree">7°C</string>
+    <string name="degree">°C</string>
+    <string name="seveb_degree">7°C</string>
 
 
     <string name="enter_city_name">Enter city name</string>

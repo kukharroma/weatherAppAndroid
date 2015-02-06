@@ -73,9 +73,12 @@ public class WeatherItemAdapter extends BaseAdapter {
         Weather weather = weatherList.get(position);
         ivWeather.setImageResource(R.drawable.weather_image);
         tvLocation.setText(weather.getCity() + ", " + weather.getSys().getCountry());
-        tvMainTemp.setText(String.valueOf(weather.getTemperature().getTemp()));
+        tvMainTemp.setText(String.valueOf(weather.getTemperature().getTemp()) + context.getString(R.string.degree));
         tvWeatherTime.setText(weather.getWeatherTime());
-        tvMinMaxTemp.setText(String.valueOf(weather.getTemperature().getMinTemp()) + " / " + String.valueOf(weather.getTemperature().getMinTemp()));
+        tvMinMaxTemp.setText(String.valueOf(weather.getTemperature().getMinTemp())
+                + context.getString(R.string.degree)
+                + " / " + String.valueOf(weather.getTemperature().getMinTemp())
+                + context.getString(R.string.degree));
         tvMainWeather.setText(weather.getFirstWeater().getMain());
         tvDescriptionWeather.setText(weather.getFirstWeater().getDescription());
 
