@@ -8,7 +8,7 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/ok_item_action"
+        android:id="@+id/done_item_action"
         android:icon="@drawable/ic_action_done"
         android:orderInCategory="20"
         android:title="@string/add_item"

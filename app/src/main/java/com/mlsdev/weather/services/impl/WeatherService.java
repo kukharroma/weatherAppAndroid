@@ -33,8 +33,8 @@ public class WeatherService implements IWeatherService {
     }
 
     @Override
-    public void deleteAllWeather() {
-//   todo      DaoManager.getWeatherRuntimeDao().deleteAll();
+    public void deleteAllWeather(List<Weather> list) {
+        DaoManager.getWeatherRuntimeDao().delete(list);
     }
 
     @Override

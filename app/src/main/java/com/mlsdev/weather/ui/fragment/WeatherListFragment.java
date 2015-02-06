@@ -35,7 +35,8 @@ import mlsdev.com.weather.R;
 public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
 
     private List<Weather> weatherList;
-    private List<WeatherItem> weatherItemList;
+    private List<WeatherItem> weatherItemList = new ArrayList<>();
+    ;
 
     private ListView lvWeather;
     private WeatherItemAdapter adapter;
@@ -61,7 +62,6 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
     private void initComponents(View view) {
         lvWeather = (ListView) view.findViewById(R.id.lv_weather);
         if (!weatherList.isEmpty()) {
-            List<WeatherItem> weatherItemList = new ArrayList<>();
             for (Weather weather : weatherList) {
                 WeatherItem item = new WeatherItem(weather, false);
                 weatherItemList.add(item);
@@ -94,6 +94,9 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
             case R.id.delete_item_action:
                 showDeletingCheckBox();
                 break;
+            case R.id.done_item_action:
+                deleteCheckedItem();
+                break;
             case R.id.main_action_settings:
                 Toast.makeText(getActivity(), "Settings", Toast.LENGTH_SHORT).show();
                 break;
@@ -109,6 +112,10 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
 
     private void showDeletingCheckBox() {
         adapter.showDeletingCheckBox();
+    }
+
+    private void deleteCheckedItem() {
+        adapter.deleteCheckedItems();
     }
 
     @Override
@@ -131,7 +138,8 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
     @Override
     public void onSuccessGetWeatherByCity(Weather weather) {
         ServiceManager.getWeatherService().saveWeather(weather);
-
+        WeatherItem item = new WeatherItem(weather, false);
+        weatherItemList.add(item);
         weatherList.add(weather);
         if (adapter == null) {
             adapter = new WeatherItemAdapter(getActivity(), weatherItemList, R.layout.weather_list_item);

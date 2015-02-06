@@ -8,11 +8,11 @@ import com.mlsdev.weather.model.Weather;
 public class WeatherItem {
 
     private Weather weather;
-    private boolean isEnabled;
+    private boolean isEnabledDelete;
 
-    public WeatherItem(Weather weather, boolean isEnabled) {
+    public WeatherItem(Weather weather, boolean isEnabledDelete) {
         this.weather = weather;
-        this.isEnabled = isEnabled;
+        this.isEnabledDelete = isEnabledDelete;
     }
 
     public Weather getWeather() {
@@ -23,11 +23,11 @@ public class WeatherItem {
         this.weather = weather;
     }
 
-    public boolean isEnabled() {
-        return isEnabled;
+    public boolean isEnabledDelete() {
+        return isEnabledDelete;
     }
 
-    public void setEnabled(boolean isEnabled) {
-        this.isEnabled = isEnabled;
+    public void setEnabledDelete(boolean isEnabled) {
+        this.isEnabledDelete = isEnabled;
     }
 }

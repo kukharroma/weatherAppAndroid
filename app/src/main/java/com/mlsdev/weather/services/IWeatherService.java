@@ -15,7 +15,7 @@ public interface IWeatherService {
 
     public void deleteWeather(Weather weather);
 
-    public void deleteAllWeather();
+    public void deleteAllWeather(List<Weather> weathers);
 
     public List<Weather> getAllWeathers();
 
