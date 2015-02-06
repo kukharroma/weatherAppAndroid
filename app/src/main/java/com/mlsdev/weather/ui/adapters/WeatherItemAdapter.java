@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mlsdev.weather.model.Weather;
+import com.mlsdev.weather.ui.model.WeatherItem;
 
 import java.util.List;
 
@@ -19,24 +21,26 @@ import mlsdev.com.weather.R;
  */
 public class WeatherItemAdapter extends BaseAdapter {
 
-    private List<Weather> weatherList;
+    private List<WeatherItem> weatherItemList;
     private Context context;
     private int resources;
 
-    public WeatherItemAdapter(Context context, List<Weather> weatherList, int resources) {
+    private boolean isShowCheckBox = false;
+
+    public WeatherItemAdapter(Context context, List<WeatherItem> weatherList, int resources) {
         this.context = context;
-        this.weatherList = weatherList;
+        this.weatherItemList = weatherList;
         this.resources = resources;
     }
 
     @Override
     public int getCount() {
-        return weatherList.size();
+        return weatherItemList.size();
     }
 
     @Override
-    public Weather getItem(int position) {
-        return weatherList.get(position);
+    public WeatherItem getItem(int position) {
+        return weatherItemList.get(position);
     }
 
     @Override
@@ -48,6 +52,7 @@ public class WeatherItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView ivWeather;
         TextView tvLocation, tvMainTemp, tvMinMaxTemp, tvWeatherTime, tvMainWeather, tvDescriptionWeather;
+        final CheckBox cbDelete;
 
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(resources, parent, false);
@@ -58,7 +63,8 @@ public class WeatherItemAdapter extends BaseAdapter {
             tvWeatherTime = (TextView) convertView.findViewById(R.id.tv_weather_time);
             tvMainWeather = (TextView) convertView.findViewById(R.id.tv_main_weather);
             tvDescriptionWeather = (TextView) convertView.findViewById(R.id.tv_description_weather);
-            convertView.setTag(new ViewHolder(ivWeather, tvLocation, tvMainTemp, tvMinMaxTemp, tvWeatherTime, tvMainWeather, tvDescriptionWeather));
+            cbDelete = (CheckBox) convertView.findViewById(R.id.cb_delete_weather);
+            convertView.setTag(new ViewHolder(ivWeather, tvLocation, tvMainTemp, tvMinMaxTemp, tvWeatherTime, tvMainWeather, tvDescriptionWeather, cbDelete));
         } else {
             ViewHolder viewHolder = (ViewHolder) convertView.getTag();
             ivWeather = viewHolder.ivWeather;
@@ -68,19 +74,23 @@ public class WeatherItemAdapter extends BaseAdapter {
             tvWeatherTime = viewHolder.tvWeatherTime;
             tvMainWeather = viewHolder.tvMainWeather;
             tvDescriptionWeather = viewHolder.tvDescriptionWeather;
+            cbDelete = viewHolder.cbDelete;
         }
 
-        Weather weather = weatherList.get(position);
+        WeatherItem item = weatherItemList.get(position);
         ivWeather.setImageResource(R.drawable.weather_image);
-        tvLocation.setText(weather.getCity() + ", " + weather.getSys().getCountry());
-        tvMainTemp.setText(String.valueOf(weather.getTemperature().getTemp()) + context.getString(R.string.degree));
-        tvWeatherTime.setText(weather.getFormattedDate());
-        tvMinMaxTemp.setText(String.valueOf(weather.getTemperature().getMinTemp())
-                + context.getString(R.string.degree)
-                + " / " + String.valueOf(weather.getTemperature().getMinTemp())
-                + context.getString(R.string.degree));
-        tvMainWeather.setText(weather.getFirstWeater().getMain());
-        tvDescriptionWeather.setText(weather.getFirstWeater().getDescription());
+        tvLocation.setText(item.getWeather().getCity() + ", " + item.getWeather().getSys().getCountry());
+        tvMainTemp.setText(String.valueOf(item.getWeather().getTemperature().getTemp()) + context.getString(R.string.degree));
+        tvWeatherTime.setText(item.getWeather().getFormattedDate());
+        tvMinMaxTemp.setText(String.valueOf(item.getWeather().getTemperature().getMinTemp()) + context.getString(R.string.degree) + " / " + String.valueOf(item.getWeather().getTemperature().getMinTemp()) + context.getString(R.string.degree));
+        tvMainWeather.setText(item.getWeather().getFirstWeater().getMain());
+        tvDescriptionWeather.setText(item.getWeather().getFirstWeater().getDescription());
+
+        if (isShowCheckBox) {
+            cbDelete.setVisibility(View.VISIBLE);
+        } else {
+            cbDelete.setVisibility(View.GONE);
+        }
 
         return convertView;
     }
@@ -88,8 +98,9 @@ public class WeatherItemAdapter extends BaseAdapter {
     private static class ViewHolder {
         public final ImageView ivWeather;
         public final TextView tvLocation, tvMainTemp, tvMinMaxTemp, tvWeatherTime, tvMainWeather, tvDescriptionWeather;
+        public final CheckBox cbDelete;
 
-        private ViewHolder(ImageView ivWeather, TextView tvLocation, TextView tvMainTemp, TextView tvMinMaxTemp, TextView tvWeatherTime, TextView tvMainWeather, TextView tvDescriptionWeather) {
+        private ViewHolder(ImageView ivWeather, TextView tvLocation, TextView tvMainTemp, TextView tvMinMaxTemp, TextView tvWeatherTime, TextView tvMainWeather, TextView tvDescriptionWeather, CheckBox cbDelete) {
             this.ivWeather = ivWeather;
             this.tvLocation = tvLocation;
             this.tvMainTemp = tvMainTemp;
@@ -97,11 +108,19 @@ public class WeatherItemAdapter extends BaseAdapter {
             this.tvWeatherTime = tvWeatherTime;
             this.tvMainWeather = tvMainWeather;
             this.tvDescriptionWeather = tvDescriptionWeather;
+            this.cbDelete = cbDelete;
         }
     }
 
-    public void updateList(List<Weather> weatherList) {
-        this.weatherList = weatherList;
+    public void updateList(List<WeatherItem> weatherList) {
+        this.weatherItemList = weatherList;
         this.notifyDataSetChanged();
     }
+
+    public void showDeletingCheckBox() {
+        isShowCheckBox = !isShowCheckBox;
+        this.notifyDataSetChanged();
+    }
+
+
 }

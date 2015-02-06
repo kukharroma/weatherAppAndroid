@@ -3,9 +3,6 @@ package com.mlsdev.weather.ui.fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -21,7 +18,7 @@ public class WeatherDetailFragment extends Fragment {
 
     private Weather weather;
 
-    private TextView tvLocation, tvMainTemp, tvMainWeather, tvMainWeatherDescription, tvMinMaxtemp;
+    private TextView tvLocation, tvMainTemp, tvMainWeather, tvMainWeatherDescription, tvMinMaxTemp;
 
     public WeatherDetailFragment(Weather weather) {
         this.weather = weather;
@@ -45,7 +42,7 @@ public class WeatherDetailFragment extends Fragment {
         tvMainTemp = (TextView) view.findViewById(R.id.tv_detail_main_temp);
         tvMainWeather = (TextView) view.findViewById(R.id.tv_detail_main_weather);
         tvMainWeatherDescription = (TextView) view.findViewById(R.id.tv_detail_weather_description);
-        tvMinMaxtemp = (TextView) view.findViewById(R.id.tv_detail_min_max_temp);
+        tvMinMaxTemp = (TextView) view.findViewById(R.id.tv_detail_min_max_temp);
     }
 
     private void fillComponents() {
@@ -53,7 +50,7 @@ public class WeatherDetailFragment extends Fragment {
         tvMainTemp.setText(String.valueOf(weather.getTemperature().getTemp()) + getString(R.string.degree));
         tvMainWeather.setText(weather.getFirstWeater().getMain());
         tvMainWeatherDescription.setText(weather.getFirstWeater().getDescription());
-        tvMinMaxtemp.setText(weather.getTemperature().getMinTemp() + getString(R.string.degree) + " / " + weather.getTemperature().getMaxTemp() + getString(R.string.degree));
+        tvMinMaxTemp.setText(weather.getTemperature().getMinTemp() + getString(R.string.degree) + " / " + weather.getTemperature().getMaxTemp() + getString(R.string.degree));
     }
 
 //    @Override

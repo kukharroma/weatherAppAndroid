@@ -22,7 +22,9 @@ import com.mlsdev.weather.services.impl.net.listeners.IGetWeatherByCity;
 import com.mlsdev.weather.ui.activity.DetailWeatherActivity;
 import com.mlsdev.weather.ui.adapters.WeatherItemAdapter;
 import com.mlsdev.weather.ui.dialogs.AddWeatherItemDialog;
+import com.mlsdev.weather.ui.model.WeatherItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import mlsdev.com.weather.R;
@@ -33,6 +35,8 @@ import mlsdev.com.weather.R;
 public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
 
     private List<Weather> weatherList;
+    private List<WeatherItem> weatherItemList;
+
     private ListView lvWeather;
     private WeatherItemAdapter adapter;
     private ProgressDialog progressDialog;
@@ -57,7 +61,12 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
     private void initComponents(View view) {
         lvWeather = (ListView) view.findViewById(R.id.lv_weather);
         if (!weatherList.isEmpty()) {
-            adapter = new WeatherItemAdapter(getActivity(), weatherList, R.layout.weather_list_item);
+            List<WeatherItem> weatherItemList = new ArrayList<>();
+            for (Weather weather : weatherList) {
+                WeatherItem item = new WeatherItem(weather, false);
+                weatherItemList.add(item);
+            }
+            adapter = new WeatherItemAdapter(getActivity(), weatherItemList, R.layout.weather_list_item);
             lvWeather.setAdapter(adapter);
 
             lvWeather.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,7 +92,7 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
                 showAddWeatherItemDialog();
                 break;
             case R.id.delete_item_action:
-                Toast.makeText(getActivity(), "Delete", Toast.LENGTH_SHORT).show();
+                showDeletingCheckBox();
                 break;
             case R.id.main_action_settings:
                 Toast.makeText(getActivity(), "Settings", Toast.LENGTH_SHORT).show();
@@ -96,6 +105,10 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
         dialog = new AddWeatherItemDialog();
         dialog.setTargetFragment(this, ADD_CITY_REQUEST_CODE);
         dialog.show(getFragmentManager(), "");
+    }
+
+    private void showDeletingCheckBox() {
+        adapter.showDeletingCheckBox();
     }
 
     @Override
@@ -121,11 +134,11 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
 
         weatherList.add(weather);
         if (adapter == null) {
-            adapter = new WeatherItemAdapter(getActivity(), weatherList, R.layout.weather_list_item);
-            adapter.updateList(weatherList);
+            adapter = new WeatherItemAdapter(getActivity(), weatherItemList, R.layout.weather_list_item);
+            adapter.updateList(weatherItemList);
             lvWeather.setAdapter(adapter);
         } else {
-            adapter.updateList(weatherList);
+            adapter.updateList(weatherItemList);
         }
         progressDialog.dismiss();
         dialog.dismiss();
