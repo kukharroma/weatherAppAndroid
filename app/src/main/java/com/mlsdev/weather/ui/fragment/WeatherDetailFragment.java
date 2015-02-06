@@ -50,12 +50,11 @@ public class WeatherDetailFragment extends Fragment {
 
     private void fillComponents() {
         tvLocation.setText(weather.getCity() + " ," + weather.getSys().getCountry());
-        tvMainTemp.setText(String.valueOf(weather.getTemperature().getTemp()));
+        tvMainTemp.setText(String.valueOf(weather.getTemperature().getTemp()) + getString(R.string.degree));
         tvMainWeather.setText(weather.getFirstWeater().getMain());
         tvMainWeatherDescription.setText(weather.getFirstWeater().getDescription());
-        tvMinMaxtemp.setText(weather.getTemperature().getMinTemp() + " / " + weather.getTemperature().getMaxTemp());
+        tvMinMaxtemp.setText(weather.getTemperature().getMinTemp() + getString(R.string.degree) + " / " + weather.getTemperature().getMaxTemp() + getString(R.string.degree));
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

@@ -54,8 +54,8 @@ public class WeatherItemAdapter extends BaseAdapter {
             ivWeather = (ImageView) convertView.findViewById(R.id.iv_weather);
             tvLocation = (TextView) convertView.findViewById(R.id.tv_location);
             tvMainTemp = (TextView) convertView.findViewById(R.id.tv_main_temp);
-            tvMinMaxTemp = (TextView) convertView.findViewById(R.id.tv_weather_time);
-            tvWeatherTime = (TextView) convertView.findViewById(R.id.tv_min_max_temp);
+            tvMinMaxTemp = (TextView) convertView.findViewById(R.id.tv_min_max_temp);
+            tvWeatherTime = (TextView) convertView.findViewById(R.id.tv_weather_time);
             tvMainWeather = (TextView) convertView.findViewById(R.id.tv_main_weather);
             tvDescriptionWeather = (TextView) convertView.findViewById(R.id.tv_description_weather);
             convertView.setTag(new ViewHolder(ivWeather, tvLocation, tvMainTemp, tvMinMaxTemp, tvWeatherTime, tvMainWeather, tvDescriptionWeather));
@@ -74,7 +74,7 @@ public class WeatherItemAdapter extends BaseAdapter {
         ivWeather.setImageResource(R.drawable.weather_image);
         tvLocation.setText(weather.getCity() + ", " + weather.getSys().getCountry());
         tvMainTemp.setText(String.valueOf(weather.getTemperature().getTemp()) + context.getString(R.string.degree));
-        tvWeatherTime.setText(weather.getWeatherTime());
+        tvWeatherTime.setText(weather.getFormattedDate());
         tvMinMaxTemp.setText(String.valueOf(weather.getTemperature().getMinTemp())
                 + context.getString(R.string.degree)
                 + " / " + String.valueOf(weather.getTemperature().getMinTemp())

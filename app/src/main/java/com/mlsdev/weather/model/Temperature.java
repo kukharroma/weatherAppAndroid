@@ -38,7 +38,7 @@ public class Temperature {
     }
 
     public double getTemp() {
-        return temp;
+        return Math.floor(temp * 10) / 10;
     }
 
     public void setTemp(double temp) {
@@ -54,7 +54,7 @@ public class Temperature {
     }
 
     public double getMinTemp() {
-        return minTemp;
+        return Math.floor(minTemp * 10) / 10;
     }
 
     public void setMinTemp(double minTemp) {
@@ -62,16 +62,10 @@ public class Temperature {
     }
 
     public double getMaxTemp() {
-        return maxTemp;
+        return Math.floor(maxTemp * 10) / 10;
     }
 
     public void setMaxTemp(double maxTemp) {
         this.maxTemp = maxTemp;
-    }
-
-    public void formattTemperature() {
-        this.temp = (this.temp * 1e1) / 1e1;
-        this.minTemp = (this.minTemp * 1e1) / 1e1;
-        this.maxTemp = (this.maxTemp * 1e1) / 1e1;
     }
 }

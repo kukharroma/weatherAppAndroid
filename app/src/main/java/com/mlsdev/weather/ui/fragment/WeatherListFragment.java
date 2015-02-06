@@ -19,6 +19,7 @@ import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.services.impl.ServiceManager;
 import com.mlsdev.weather.services.impl.net.WeatherNetworkService;
 import com.mlsdev.weather.services.impl.net.listeners.IGetWeatherByCity;
+import com.mlsdev.weather.ui.activity.DetailWeatherActivity;
 import com.mlsdev.weather.ui.adapters.WeatherItemAdapter;
 import com.mlsdev.weather.ui.dialogs.AddWeatherItemDialog;
 
@@ -62,8 +63,8 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
             lvWeather.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getActivity(), DetailWeatherFragmentActivity.class);
-                    intent.putExtra(DetailWeatherFragmentActivity.CURRENT_ITEM, position);
+                    Intent intent = new Intent(getActivity(), DetailWeatherActivity.class);
+                    intent.putExtra(DetailWeatherActivity.CURRENT_ITEM, position);
                     startActivity(intent);
                 }
             });

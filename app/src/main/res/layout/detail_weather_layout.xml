@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="89dp"
+        android:layout_marginTop="60dp"
         android:text="London, GB"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -22,7 +22,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/degree"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="85dp" />
+        android:textSize="50dp" />
 
     <TextView
         android:id="@+id/tv_detail_main_weather"

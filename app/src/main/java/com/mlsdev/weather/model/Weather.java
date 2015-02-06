@@ -18,6 +18,8 @@ import java.util.Date;
 @DatabaseTable(tableName = "weather")
 public class Weather implements Parcelable {
 
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM hh:mm");
+
     public Weather() {
 
     }
@@ -155,9 +157,7 @@ public class Weather implements Parcelable {
 
     }
 
-    public void formaParams() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM hh:mm");
-        this.weatherTime = formatter.format(new Date(Integer.parseInt(this.weatherTime)));
-        this.getTemperature().formattTemperature();
+    public String getFormattedDate(){
+        return dateFormat.format(new Date(Integer.parseInt(this.weatherTime)));
     }
 }
