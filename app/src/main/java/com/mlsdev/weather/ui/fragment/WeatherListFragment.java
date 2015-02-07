@@ -44,6 +44,7 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
     private AddWeatherItemDialog dialog;
 
     private static final int ADD_CITY_REQUEST_CODE = 1;
+    private static boolean IS_ANY_ITEM_DELETE_CHECKED = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,16 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main_weather_menu, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuInflater inflater = getActivity().getMenuInflater();
+        if(IS_ANY_ITEM_DELETE_CHECKED){
+            inflater.inflate(R.menu.main_weather_menu, menu);
+        }else {
+            inflater.inflate(R.menu.main_weather_menu, menu);
+        }
     }
 
     @Override
