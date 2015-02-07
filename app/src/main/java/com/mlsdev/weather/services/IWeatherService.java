@@ -11,7 +11,7 @@ public interface IWeatherService {
 
     public void saveWeather(Weather weather);
 
-    public void updateWeather(Weather weather);
+    public void createOrUpdateWeather(Weather weather);
 
     public void deleteWeather(Weather weather);
 

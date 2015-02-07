@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.services.impl.ServiceManager;
+import com.mlsdev.weather.ui.fragment.WeatherListFragment;
 import com.mlsdev.weather.ui.model.WeatherItem;
 
 import java.util.ArrayList;
@@ -24,16 +25,19 @@ import mlsdev.com.weather.R;
  */
 public class WeatherItemAdapter extends BaseAdapter {
 
+    private WeatherListFragment fragment;
     private List<WeatherItem> weatherItemList;
     private Context context;
     private int resources;
 
     private boolean isShowCheckBox = false;
 
-    public WeatherItemAdapter(Context context, List<WeatherItem> weatherList, int resources) {
+
+    public WeatherItemAdapter(Context context, WeatherListFragment fragment, List<WeatherItem> weatherList, int resources) {
         this.context = context;
         this.weatherItemList = weatherList;
         this.resources = resources;
+        this.fragment = fragment;
     }
 
     @Override
@@ -97,11 +101,12 @@ public class WeatherItemAdapter extends BaseAdapter {
         cbDelete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                cbDelete.setChecked(isChecked);
                 item.setEnabledDelete(isChecked);
+                showOrHideDoneActionIcon();
             }
         });
         cbDelete.setChecked(item.isEnabledDelete());
+
 
         return convertView;
     }
@@ -133,25 +138,10 @@ public class WeatherItemAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
-//    public void hideDeletingCheckBox() {
-//        isShowCheckBox = false;
-//        this.notifyDataSetChanged();
-//    }
-
-//            convertView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (cbDelete.getVisibility() != View.GONE) {
-//                        if (cbDelete.isChecked()) {
-//                            item.setEnabledDelete(false);
-//                            cbDelete.setChecked(item.isEnabledDelete());
-//                        } else {
-//                            item.setEnabledDelete(true);
-//                            cbDelete.setChecked(item.isEnabledDelete());
-//                        }
-//                    }
-//                }
-//            });
+    public void hideDeletingCheckBox() {
+        isShowCheckBox = false;
+        this.notifyDataSetChanged();
+    }
 
     public void deleteCheckedItems() {
         List<WeatherItem> resultList = new ArrayList<>();
@@ -164,8 +154,22 @@ public class WeatherItemAdapter extends BaseAdapter {
         }
         weatherItemList.removeAll(resultList);
         ServiceManager.getWeatherService().deleteAllWeather(weathers);
-        showDeletingCheckBox();
+        hideDeletingCheckBox();
+        WeatherListFragment.IS_ANY_ITEM_DELETE_CHECKED = false;
+        fragment.getActivity().invalidateOptionsMenu();
         updateList(weatherItemList);
+    }
+
+    private void showOrHideDoneActionIcon() {
+        for (WeatherItem items : weatherItemList) {
+            if (items.isEnabledDelete()) {
+                WeatherListFragment.IS_ANY_ITEM_DELETE_CHECKED = true;
+                fragment.getActivity().invalidateOptionsMenu();
+                return;
+            }
+        }
+        WeatherListFragment.IS_ANY_ITEM_DELETE_CHECKED = false;
+        fragment.getActivity().invalidateOptionsMenu();
     }
 
 }

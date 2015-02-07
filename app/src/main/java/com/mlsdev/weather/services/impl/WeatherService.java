@@ -1,7 +1,5 @@
 package com.mlsdev.weather.services.impl;
 
-import android.util.Log;
-
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.mlsdev.weather.dao.DaoManager;
 import com.mlsdev.weather.model.Weather;
@@ -19,11 +17,10 @@ public class WeatherService implements IWeatherService {
     @Override
     public void saveWeather(Weather weather) {
         DaoManager.getWeatherRuntimeDao().create(weather);
-        Log.d(this.getClass().toString(), "Weather created");
     }
 
     @Override
-    public void updateWeather(Weather weather) {
+    public void createOrUpdateWeather(Weather weather) {
         DaoManager.getWeatherRuntimeDao().createOrUpdate(weather);
     }
 

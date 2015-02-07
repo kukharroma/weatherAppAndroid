@@ -44,7 +44,7 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
     private AddWeatherItemDialog dialog;
 
     private static final int ADD_CITY_REQUEST_CODE = 1;
-    private static boolean IS_ANY_ITEM_DELETE_CHECKED = false;
+    public static boolean IS_ANY_ITEM_DELETE_CHECKED;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,7 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
                 WeatherItem item = new WeatherItem(weather, false);
                 weatherItemList.add(item);
             }
-            adapter = new WeatherItemAdapter(getActivity(), weatherItemList, R.layout.weather_list_item);
+            adapter = new WeatherItemAdapter(getActivity(), this, weatherItemList, R.layout.weather_list_item);
             lvWeather.setAdapter(adapter);
 
             lvWeather.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -82,16 +82,11 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main_weather_menu, menu);
-    }
-
-    @Override
     public void onPrepareOptionsMenu(Menu menu) {
         MenuInflater inflater = getActivity().getMenuInflater();
-        if(IS_ANY_ITEM_DELETE_CHECKED){
-            inflater.inflate(R.menu.main_weather_menu, menu);
-        }else {
+        if (IS_ANY_ITEM_DELETE_CHECKED) {
+            inflater.inflate(R.menu.delete_item_done_menu, menu);
+        } else {
             inflater.inflate(R.menu.main_weather_menu, menu);
         }
     }
@@ -136,11 +131,7 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
                 case ADD_CITY_REQUEST_CODE:
                     WeatherNetworkService weatherNetworkService = new WeatherNetworkService(this);
                     weatherNetworkService.getWeatherByCity(data.getStringExtra(AddWeatherItemDialog.CITY_NAME));
-                    progressDialog = new ProgressDialog(getActivity());
-                    progressDialog.setCancelable(false);
-                    progressDialog.setTitle(getString(R.string.progress_bar_load_weather));
-                    progressDialog.setMessage(getString(R.string.progress_bar_wait));
-                    progressDialog.show();
+                    showDialog(getString(R.string.progress_bar_load_weather), getString(R.string.progress_bar_wait));
                     break;
             }
         }
@@ -153,20 +144,31 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
         weatherItemList.add(item);
         weatherList.add(weather);
         if (adapter == null) {
-            adapter = new WeatherItemAdapter(getActivity(), weatherItemList, R.layout.weather_list_item);
+            adapter = new WeatherItemAdapter(getActivity(), this, weatherItemList, R.layout.weather_list_item);
             adapter.updateList(weatherItemList);
             lvWeather.setAdapter(adapter);
         } else {
             adapter.updateList(weatherItemList);
         }
-        progressDialog.dismiss();
-        dialog.dismiss();
+        dismissDialogs();
     }
 
     @Override
     public void onErrorGetWeatherByCity(String str) {
+        dismissDialogs();
+        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showDialog(String tittle, String message) {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle(tittle);
+        progressDialog.setMessage(message);
+        progressDialog.show();
+    }
+
+    private void dismissDialogs() {
         progressDialog.dismiss();
         dialog.dismiss();
-        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
     }
 }
