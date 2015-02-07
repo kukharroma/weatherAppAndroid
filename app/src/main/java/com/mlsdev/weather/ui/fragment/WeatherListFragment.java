@@ -83,10 +83,11 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
         MenuInflater inflater = getActivity().getMenuInflater();
         if (IS_ANY_ITEM_DELETE_CHECKED) {
             inflater.inflate(R.menu.delete_item_done_menu, menu);
-        } else {
+        }else {
             inflater.inflate(R.menu.main_weather_menu, menu);
         }
     }
