@@ -25,4 +25,5 @@ public class MainActivity extends BaseActivity {
     private void showWeatherListFragment() {
         getFragmentManager().beginTransaction().replace(R.id.container, new WeatherListFragment(), WeatherListFragment.class.getName()).commit();
     }
+    
 }

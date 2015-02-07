@@ -9,5 +9,5 @@ public interface IGetWeatherByCity {
 
     public void onSuccessGetWeatherByCity(Weather weather);
 
-    public void onErrorGetWeatherByCity(String str);
+    public void onErrorGetWeatherByCity(String error);
 }

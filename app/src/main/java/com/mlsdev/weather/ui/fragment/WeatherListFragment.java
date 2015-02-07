@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.services.impl.ServiceManager;
 import com.mlsdev.weather.services.impl.net.WeatherNetworkService;
+import com.mlsdev.weather.services.impl.net.listeners.IGetAllWeatherById;
 import com.mlsdev.weather.services.impl.net.listeners.IGetWeatherByCity;
 import com.mlsdev.weather.ui.activity.DetailWeatherActivity;
 import com.mlsdev.weather.ui.adapters.WeatherItemAdapter;
@@ -34,7 +35,7 @@ import mlsdev.com.weather.R;
  */
 public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
 
-    private List<Weather> weatherList;
+    private List<Weather> weathers;
     private List<WeatherItem> weatherItemList = new ArrayList<>();
     ;
 
@@ -50,7 +51,7 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        weatherList = ServiceManager.getWeatherService().getAllWeathers();
+        weathers = ServiceManager.getWeatherService().getAllWeathers();
     }
 
     @Override
@@ -62,8 +63,8 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
 
     private void initComponents(View view) {
         lvWeather = (ListView) view.findViewById(R.id.lv_weather);
-        if (!weatherList.isEmpty()) {
-            for (Weather weather : weatherList) {
+        if (!weathers.isEmpty()) {
+            for (Weather weather : weathers) {
                 WeatherItem item = new WeatherItem(weather, false);
                 weatherItemList.add(item);
             }
@@ -87,7 +88,7 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
         MenuInflater inflater = getActivity().getMenuInflater();
         if (IS_ANY_ITEM_DELETE_CHECKED) {
             inflater.inflate(R.menu.delete_item_done_menu, menu);
-        }else {
+        } else {
             inflater.inflate(R.menu.main_weather_menu, menu);
         }
     }
@@ -107,6 +108,9 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
             case R.id.main_action_settings:
                 Toast.makeText(getActivity(), "Settings", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.action_update_all:
+
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -125,6 +129,13 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
         adapter.deleteCheckedItems();
     }
 
+    private void updateAllWeathers() {
+        List<String> citiesId = new ArrayList<>();
+        for (Weather weather : weathers) {
+            citiesId.add(String.valueOf(weather.getId()));
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
@@ -132,7 +143,7 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
                 case ADD_CITY_REQUEST_CODE:
                     WeatherNetworkService weatherNetworkService = new WeatherNetworkService(this);
                     weatherNetworkService.getWeatherByCity(data.getStringExtra(AddWeatherItemDialog.CITY_NAME));
-                    showDialog(getString(R.string.progress_bar_load_weather), getString(R.string.progress_bar_wait));
+                    showDialog(getString(R.string.pb_load_weather_tittle), getString(R.string.pb_loading_message));
                     break;
             }
         }
@@ -143,7 +154,7 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
         ServiceManager.getWeatherService().saveWeather(weather);
         WeatherItem item = new WeatherItem(weather, false);
         weatherItemList.add(item);
-        weatherList.add(weather);
+        weathers.add(weather);
         if (adapter == null) {
             adapter = new WeatherItemAdapter(getActivity(), this, weatherItemList, R.layout.weather_list_item);
             adapter.updateList(weatherItemList);
@@ -155,10 +166,12 @@ public class WeatherListFragment extends Fragment implements IGetWeatherByCity {
     }
 
     @Override
-    public void onErrorGetWeatherByCity(String str) {
+    public void onErrorGetWeatherByCity(String error) {
         dismissDialogs();
-        Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
+
+
 
     private void showDialog(String tittle, String message) {
         progressDialog = new ProgressDialog(getActivity());

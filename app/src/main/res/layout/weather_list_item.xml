@@ -47,7 +47,7 @@
             android:layout_below="@+id/tv_location"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="@string/seveb_degree"
+            android:text="@string/seven_degree"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="22sp" />
 

@@ -2,29 +2,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/main_action_settings"
-        app:showAsAction="never"
+        android:id="@+id/action_update_all"
         android:orderInCategory="100"
-        android:title="@string/action_settings" />
+        android:title="@string/update_all"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/main_action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/done_item_action"
-        app:showAsAction="always"
         android:icon="@drawable/ic_action_done"
         android:orderInCategory="20"
-        android:title="@string/add_item" />
+        android:title="@string/add_item"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/add_item_action"
-        app:showAsAction="always"
         android:icon="@drawable/ic_action_add"
         android:orderInCategory="20"
-        android:title="@string/add_item" />
+        android:title="@string/add_item"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/delete_item_action"
-        app:showAsAction="always"
         android:icon="@drawable/ic_action_delete"
         android:orderInCategory="20"
-        android:title="@string/delete_item" />
+        android:title="@string/delete_item"
+        app:showAsAction="always" />
 </menu>
