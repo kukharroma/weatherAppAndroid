@@ -33,6 +33,7 @@ public class AddWeatherItemDialog extends DialogFragment {
                 Intent intent = new Intent();
                 intent.putExtra(CITY_NAME, etCity.getText().toString());
                 getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
+                dismiss();
             }
         });
         return view;

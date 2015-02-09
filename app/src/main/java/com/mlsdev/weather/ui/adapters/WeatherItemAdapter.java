@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.services.impl.ServiceManager;
-import com.mlsdev.weather.ui.fragment.WeatherListFragment;
+import com.mlsdev.weather.ui.fragment.impl.WeatherListFr;
 import com.mlsdev.weather.ui.model.WeatherItem;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import mlsdev.com.weather.R;
  */
 public class WeatherItemAdapter extends BaseAdapter {
 
-    private WeatherListFragment fragment;
+    private WeatherListFr fragment;
     private List<WeatherItem> weatherItemList;
     private Context context;
     private int resources;
@@ -33,7 +33,7 @@ public class WeatherItemAdapter extends BaseAdapter {
     private boolean isShowCheckBox = false;
 
 
-    public WeatherItemAdapter(Context context, WeatherListFragment fragment, List<WeatherItem> weatherList, int resources) {
+    public WeatherItemAdapter(Context context, WeatherListFr fragment, List<WeatherItem> weatherList, int resources) {
         this.context = context;
         this.weatherItemList = weatherList;
         this.resources = resources;
@@ -143,32 +143,15 @@ public class WeatherItemAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
-    public void deleteCheckedItems() {
-        List<WeatherItem> resultList = new ArrayList<>();
-        List<Weather> weathers = new ArrayList<>();
-        for (WeatherItem item : weatherItemList) {
-            if (item.isEnabledDelete()) {
-                resultList.add(item);
-                weathers.add(item.getWeather());
-            }
-        }
-        weatherItemList.removeAll(resultList);
-        ServiceManager.getWeatherService().deleteAllWeather(weathers);
-        hideDeletingCheckBox();
-        WeatherListFragment.IS_ANY_ITEM_DELETE_CHECKED = false;
-        fragment.getActivity().invalidateOptionsMenu();
-        updateList(weatherItemList);
-    }
-
     private void showOrHideDoneActionIcon() {
         for (WeatherItem items : weatherItemList) {
             if (items.isEnabledDelete()) {
-                WeatherListFragment.IS_ANY_ITEM_DELETE_CHECKED = true;
+                WeatherListFr.IS_ANY_ITEM_DELETE_CHECKED = true;
                 fragment.getActivity().invalidateOptionsMenu();
                 return;
             }
         }
-        WeatherListFragment.IS_ANY_ITEM_DELETE_CHECKED = false;
+        WeatherListFr.IS_ANY_ITEM_DELETE_CHECKED = false;
         fragment.getActivity().invalidateOptionsMenu();
     }
 

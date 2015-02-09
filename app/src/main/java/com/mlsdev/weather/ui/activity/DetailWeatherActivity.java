@@ -11,7 +11,7 @@ import android.view.MenuInflater;
 
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.services.impl.ServiceManager;
-import com.mlsdev.weather.ui.fragment.WeatherDetailFragment;
+import com.mlsdev.weather.ui.fragment.impl.WeatherDetailFr;
 
 import java.util.List;
 
@@ -63,7 +63,7 @@ public class DetailWeatherActivity extends BaseActivity {
         @Override
         public Fragment getItem(int position) {
             Weather weather = weatherList.get(position);
-            return new WeatherDetailFragment(weather);
+            return new WeatherDetailFr(weather);
         }
 
         @Override

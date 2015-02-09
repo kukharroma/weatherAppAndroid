@@ -2,7 +2,7 @@ package com.mlsdev.weather.ui.activity;
 
 import android.os.Bundle;
 
-import com.mlsdev.weather.ui.fragment.WeatherListFragment;
+import com.mlsdev.weather.ui.fragment.impl.WeatherListFr;
 
 import mlsdev.com.weather.R;
 
@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void showWeatherListFragment() {
-        getFragmentManager().beginTransaction().replace(R.id.container, new WeatherListFragment(), WeatherListFragment.class.getName()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.container, new WeatherListFr(), WeatherListFr.class.getName()).commit();
     }
     
 }

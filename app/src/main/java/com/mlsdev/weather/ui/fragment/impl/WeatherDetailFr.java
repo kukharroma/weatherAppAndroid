@@ -1,4 +1,4 @@
-package com.mlsdev.weather.ui.fragment;
+package com.mlsdev.weather.ui.fragment.impl;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,19 +8,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mlsdev.weather.model.Weather;
+import com.mlsdev.weather.ui.fragment.BaseFragment;
+import com.mlsdev.weather.ui.fragment.IWeatherDetailFr;
 
 import mlsdev.com.weather.R;
 
 /**
  * Created by romakukhar on 04.02.15.
  */
-public class WeatherDetailFragment extends Fragment {
+public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
 
     private Weather weather;
 
     private TextView tvLocation, tvMainTemp, tvMainWeather, tvMainWeatherDescription, tvMinMaxTemp;
 
-    public WeatherDetailFragment(Weather weather) {
+    public WeatherDetailFr(Weather weather) {
         this.weather = weather;
     }
 
@@ -37,7 +39,8 @@ public class WeatherDetailFragment extends Fragment {
         return view;
     }
 
-    private void initComponents(View view) {
+    @Override
+    public void initComponents(View view) {
         tvLocation = (TextView) view.findViewById(R.id.tv_detail_location);
         tvMainTemp = (TextView) view.findViewById(R.id.tv_detail_main_temp);
         tvMainWeather = (TextView) view.findViewById(R.id.tv_detail_main_weather);
@@ -45,7 +48,8 @@ public class WeatherDetailFragment extends Fragment {
         tvMinMaxTemp = (TextView) view.findViewById(R.id.tv_detail_min_max_temp);
     }
 
-    private void fillComponents() {
+    @Override
+    public void fillComponents() {
         tvLocation.setText(weather.getCity() + " ," + weather.getSys().getCountry());
         tvMainTemp.setText(String.valueOf(weather.getTemperature().getTemp()) + getString(R.string.degree));
         tvMainWeather.setText(weather.getFirstWeater().getMain());
@@ -53,13 +57,19 @@ public class WeatherDetailFragment extends Fragment {
         tvMinMaxTemp.setText(weather.getTemperature().getMinTemp() + getString(R.string.degree) + " / " + weather.getTemperature().getMaxTemp() + getString(R.string.degree));
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.detail_weather_menu, menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        return super.onOptionsItemSelected(item);
-//    }
+
+    @Override
+    public void updateDetailWeather() {
+
+    }
+
+    @Override
+    public void showProgressDialog(String tittle, String message) {
+
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+
+    }
 }
