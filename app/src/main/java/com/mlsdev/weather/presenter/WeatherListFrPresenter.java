@@ -1,7 +1,5 @@
 package com.mlsdev.weather.presenter;
 
-import android.content.Context;
-
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.services.impl.ServiceManager;
 import com.mlsdev.weather.services.impl.net.WeatherNetworkService;
@@ -35,15 +33,6 @@ public class WeatherListFrPresenter implements IGetWeatherByCity {
         iWeatherListFr.updateWeatherList(weatherItems);
     }
 
-    public List<WeatherItem> getAllWeatherItem() {
-        List<WeatherItem> resultList = new ArrayList<>();
-        List<Weather> weathers = ServiceManager.getWeatherService().getAllWeathers();
-        for (Weather weather : weathers) {
-            resultList.add(new WeatherItem(weather, false));
-        }
-        return resultList;
-    }
-
     public void showDeletingCheckBox() {
         iWeatherListFr.showDeletingCheckBox();
     }
@@ -54,6 +43,10 @@ public class WeatherListFrPresenter implements IGetWeatherByCity {
 
     public void updateMenu() {
         iWeatherListFr.updateMenu();
+    }
+
+    public void showAddWeatherItemDialog() {
+        iWeatherListFr.showAddWeatherItemDialog();
     }
 
     public void deleteCheckedItems(List<WeatherItem> weatherItems) {
@@ -72,8 +65,13 @@ public class WeatherListFrPresenter implements IGetWeatherByCity {
         updateWeatherList(weatherItems);
     }
 
-    public void showAddWeatherItemDialog() {
-        iWeatherListFr.showAddWeatherItemDialog();
+    public List<WeatherItem> getAllWeatherItem() {
+        List<WeatherItem> resultList = new ArrayList<>();
+        List<Weather> weathers = ServiceManager.getWeatherService().getAllWeathers();
+        for (Weather weather : weathers) {
+            resultList.add(new WeatherItem(weather, false));
+        }
+        return resultList;
     }
 
     public void loadWeather(String cityName) {
@@ -81,7 +79,6 @@ public class WeatherListFrPresenter implements IGetWeatherByCity {
         iWeatherListFr.showProgressDialog(context.getString(R.string.pb_load_weather_tittle), context.getString(R.string.pb_wait_message));
         weatherNetworkService.getWeatherByCity(cityName);
     }
-
 
     @Override
     public void onSuccessGetWeatherByCity(Weather weather) {

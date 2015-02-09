@@ -107,7 +107,6 @@ public class WeatherItemAdapter extends BaseAdapter {
         });
         cbDelete.setChecked(item.isEnabledDelete());
 
-
         return convertView;
     }
 
