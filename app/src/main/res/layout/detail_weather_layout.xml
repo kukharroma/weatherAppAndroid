@@ -51,4 +51,10 @@
         android:text="8.2°C / -2.2°C"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_detail_min_max_temp" />
+
 </RelativeLayout>

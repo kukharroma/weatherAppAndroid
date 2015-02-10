@@ -18,7 +18,6 @@ import mlsdev.com.weather.R;
 public class AddWeatherItemDialog extends DialogFragment {
 
     private TextView etCity;
-    private Button btCity;
 
     public static String CITY_NAME = "CITY_NAME";
 
@@ -26,7 +25,7 @@ public class AddWeatherItemDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_weather_item_dialog, container, false);
         etCity = (TextView) view.findViewById(R.id.et_city);
-        btCity = (Button) view.findViewById(R.id.bt_add_city);
+        Button btCity = (Button) view.findViewById(R.id.bt_add_city);
         btCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
