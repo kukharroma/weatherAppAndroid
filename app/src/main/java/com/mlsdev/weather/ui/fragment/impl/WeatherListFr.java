@@ -110,6 +110,7 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
 
     @Override
     public void updateWeatherList(List<WeatherItem> weatherItems) {
+        weatherItemList = weatherItems;
         adapter.updateList(weatherItems);
     }
 
@@ -131,6 +132,11 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
     }
 
     @Override
+    public void onDeleteWeather() {
+        adapter.showOrHideDoneActionIcon();
+    }
+
+    @Override
     public void onSuccessAddWeather() {
         presenter.updateWeatherList();
     }
@@ -142,12 +148,12 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
 
     @Override
     public void onSuccessUpdateAllWeather() {
-
+        presenter.updateWeatherList();
     }
 
     @Override
     public void onErrorUpdateAllWeather(String error) {
-
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
 
 

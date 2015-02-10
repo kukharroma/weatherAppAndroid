@@ -25,6 +25,8 @@ public interface IWeatherListFr extends BaseFragment {
 
     public void hideDeletingCheckBox();
 
+    public void onDeleteWeather();
+
     public void updateMenu();
 
 }

@@ -9,7 +9,9 @@ public interface IWeatherNetworkService {
 
     public void getWeatherByCity(String cityName);
 
-    public void getWeatherByCitiesId(List<String> citiesList);
+    public void getWeatherByCitiesName(List<String> citiesName);
+
+    public void getWeatherByCitiesId(List<String> citiesIdList);
 
     public void getWeatherById(int id);
 

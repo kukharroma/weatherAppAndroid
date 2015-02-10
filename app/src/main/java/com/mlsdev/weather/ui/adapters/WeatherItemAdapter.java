@@ -142,7 +142,7 @@ public class WeatherItemAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
-    private void showOrHideDoneActionIcon() {
+    public void showOrHideDoneActionIcon() {
         for (WeatherItem items : weatherItemList) {
             if (items.isEnabledDelete()) {
                 WeatherListFr.IS_ANY_ITEM_DELETE_CHECKED = true;

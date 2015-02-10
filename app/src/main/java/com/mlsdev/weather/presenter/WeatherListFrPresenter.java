@@ -4,8 +4,7 @@ import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.model.WeatherList;
 import com.mlsdev.weather.services.impl.ServiceManager;
 import com.mlsdev.weather.services.impl.net.WeatherNetworkService;
-import com.mlsdev.weather.services.impl.net.listeners.IGetAllWeatherById;
-import com.mlsdev.weather.services.impl.net.listeners.IGetWeatherByCity;
+import com.mlsdev.weather.services.impl.net.listeners.BaseWeatherListener;
 import com.mlsdev.weather.ui.fragment.IWeatherListFr;
 import com.mlsdev.weather.ui.fragment.impl.WeatherListFr;
 import com.mlsdev.weather.ui.model.WeatherItem;
@@ -18,11 +17,11 @@ import mlsdev.com.weather.R;
 /**
  * Created by romakukhar on 09.02.15.
  */
-public class WeatherListFrPresenter implements IGetWeatherByCity, IGetAllWeatherById {
+public class WeatherListFrPresenter implements BaseWeatherListener {
 
     private IWeatherListFr weatherListFr;
 
-    private WeatherNetworkService weatherNetworkService = new WeatherNetworkService((IGetAllWeatherById) this);
+    private WeatherNetworkService weatherNetworkService = new WeatherNetworkService(this);
 
     public WeatherListFrPresenter(IWeatherListFr weatherListFr) {
         this.weatherListFr = weatherListFr;
@@ -54,6 +53,7 @@ public class WeatherListFrPresenter implements IGetWeatherByCity, IGetAllWeather
         weatherItems.removeAll(resultList);
         ServiceManager.getWeatherService().deleteWeatherList(weathers);
 
+        weatherListFr.onDeleteWeather();
         weatherListFr.updateMenu();
         weatherListFr.hideDeletingCheckBox();
         weatherListFr.updateWeatherList(weatherItems);
@@ -96,7 +96,9 @@ public class WeatherListFrPresenter implements IGetWeatherByCity, IGetAllWeather
 
     @Override
     public void onSuccessGetAllWeathers(WeatherList weatherList) {
+        ServiceManager.getWeatherService().deleteAllWeathers();
         ServiceManager.getWeatherService().updateWeathers(weatherList.getList());
+
         weatherListFr.onSuccessUpdateAllWeather();
         weatherListFr.dismissProgressDialog();
     }
@@ -104,7 +106,7 @@ public class WeatherListFrPresenter implements IGetWeatherByCity, IGetAllWeather
     @Override
     public void onErrorGetAllWeathers(String error) {
         weatherListFr.dismissProgressDialog();
-        weatherListFr.onErrorAddWeather(error);
+        weatherListFr.onErrorUpdateAllWeather(error);
     }
 
 }
