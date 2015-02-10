@@ -13,9 +13,13 @@ public interface IWeatherListFr extends BaseFragment {
 
     public void showAddWeatherItemDialog();
 
+    public void onSuccessAddWeather();
+
     public void onErrorAddWeather(String error);
 
-    public void onSuccessAddWeather();
+    public void onSuccessUpdateAllWeather();
+
+    public void onErrorUpdateAllWeather(String error);
 
     public void showDeletingCheckBox();
 

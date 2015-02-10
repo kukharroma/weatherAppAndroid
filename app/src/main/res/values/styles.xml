@@ -13,7 +13,7 @@
         <!--We will be using the toolbar so no need to show ActionBar-->
         <item name="android:windowActionBar">false</item>
         <!--Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
-        <!-- colorPrimary is used for the default action bar background -->
+        <!-- colorPrimary is used for the default weatherByCity bar background -->
         <item name="colorPrimary">#2196F3</item>
         <!--colorPrimaryDark is used for the status bar -->
         <item name="colorPrimaryDark">#1976D2</item>

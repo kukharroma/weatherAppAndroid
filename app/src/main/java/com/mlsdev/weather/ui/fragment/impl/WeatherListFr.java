@@ -102,12 +102,11 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
                 Toast.makeText(getActivity(), "Settings", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_update_all:
-                Toast.makeText(getActivity(), "Update all", Toast.LENGTH_SHORT).show();
+                presenter.loadAllWeathers();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void updateWeatherList(List<WeatherItem> weatherItems) {
@@ -132,6 +131,31 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
     }
 
     @Override
+    public void onSuccessAddWeather() {
+        presenter.updateWeatherList();
+    }
+
+    @Override
+    public void onErrorAddWeather(String error) {
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSuccessUpdateAllWeather() {
+
+    }
+
+    @Override
+    public void onErrorUpdateAllWeather(String error) {
+
+    }
+
+
+    public void updateMenu() {
+        getActivity().invalidateOptionsMenu();
+    }
+
+    @Override
     public void showProgressDialog(String tittle, String message) {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
@@ -143,20 +167,6 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
     @Override
     public void dismissProgressDialog() {
         progressDialog.dismiss();
-    }
-
-    @Override
-    public void onErrorAddWeather(String error) {
-        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onSuccessAddWeather() {
-        presenter.updateWeatherList();
-    }
-
-    public void updateMenu() {
-        getActivity().invalidateOptionsMenu();
     }
 
     @Override

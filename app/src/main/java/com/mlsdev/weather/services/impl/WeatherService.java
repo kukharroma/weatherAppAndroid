@@ -1,11 +1,13 @@
 package com.mlsdev.weather.services.impl;
 
+import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.mlsdev.weather.dao.DaoManager;
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.services.IWeatherService;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,8 +32,20 @@ public class WeatherService implements IWeatherService {
     }
 
     @Override
-    public void deleteAllWeather(List<Weather> list) {
+    public void deleteAllWeathers() {
+        DaoManager.getWeatherRuntimeDao().delete(getAllWeathers());
+    }
+
+    @Override
+    public void deleteWeatherList(List<Weather> list) {
         DaoManager.getWeatherRuntimeDao().delete(list);
+    }
+
+    @Override
+    public void updateWeathers(List<Weather> weathers) {
+        for (Weather weather : weathers) {
+            DaoManager.getWeatherRuntimeDao().createOrUpdate(weather);
+        }
     }
 
     @Override
@@ -63,5 +77,21 @@ public class WeatherService implements IWeatherService {
             e.printStackTrace();
         }
         return weather;
+    }
+
+    @Override
+    public List<String> getCitiesId() {
+        List<String> resultList = new ArrayList<>();
+        try {
+            QueryBuilder<Weather, Integer> queryBuilder = DaoManager.getWeatherRuntimeDao().queryBuilder();
+            queryBuilder.selectColumns("id");
+            GenericRawResults<String[]> rawResults = DaoManager.getWeatherRuntimeDao().queryRaw(queryBuilder.prepareStatementString());
+            for (String[] IdItem : rawResults) {
+                resultList.add(IdItem[0]);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultList;
     }
 }

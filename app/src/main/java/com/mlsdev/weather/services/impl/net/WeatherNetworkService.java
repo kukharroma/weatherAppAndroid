@@ -4,7 +4,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.mlsdev.weather.model.Weather;
+import com.mlsdev.weather.model.WeatherList;
 import com.mlsdev.weather.services.impl.ServerRequest;
+import com.mlsdev.weather.services.impl.net.listeners.IGetAllWeatherById;
 import com.mlsdev.weather.services.impl.net.listeners.IGetWeatherByCity;
 import com.mlsdev.weather.services.net.IWeatherNetworkService;
 import com.mlsdev.weather.util.UrlBuilder;
@@ -16,40 +18,46 @@ import java.util.List;
  */
 public class WeatherNetworkService implements IWeatherNetworkService {
 
-    private IGetWeatherByCity action;
+    private IGetWeatherByCity weatherByCity;
+    private IGetAllWeatherById weatherById;
 
-    public WeatherNetworkService(IGetWeatherByCity action) {
-        this.action = action;
+
+    public WeatherNetworkService(IGetWeatherByCity weatherByCity) {
+        this.weatherByCity = weatherByCity;
+    }
+
+    public WeatherNetworkService(IGetAllWeatherById weatherById) {
+        this.weatherById = weatherById;
     }
 
     Response.Listener<Weather> successGetWeather = new Response.Listener<Weather>() {
         @Override
         public void onResponse(Weather weather) {
-            action.onSuccessGetWeatherByCity(weather);
+            weatherByCity.onSuccessGetWeatherByCity(weather);
         }
     };
 
     Response.ErrorListener errorGetWeather = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            action.onErrorGetWeatherByCity("error");
+            weatherByCity.onErrorGetWeatherByCity("error");
         }
     };
 
-    Response.Listener<Weather> successGetAllWeather = new Response.Listener<Weather>() {
+
+    Response.Listener<WeatherList> successGetAllWeather = new Response.Listener<WeatherList>() {
         @Override
-        public void onResponse(Weather weather) {
-            action.onSuccessGetWeatherByCity(weather);
+        public void onResponse(WeatherList weathers) {
+            weatherById.onSuccessGetAllWeathers(weathers);
         }
     };
 
     Response.ErrorListener errorGetAllWeather = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            action.onErrorGetWeatherByCity("error");
+            weatherById.onErrorGetAllWeathers("error");
         }
     };
-
 
     @Override
     public void getWeatherById(int id) {
@@ -59,9 +67,9 @@ public class WeatherNetworkService implements IWeatherNetworkService {
     }
 
     @Override
-    public void getWeatherByCitiesId(List<String> citiesList) {
-        String url = UrlBuilder.getWeatherUrlByCitiesId(citiesList);
-        ServerRequest<Weather> request = new ServerRequest<>(Request.Method.POST, url, Weather.class, successGetAllWeather, errorGetAllWeather);
+    public void getWeatherByCitiesId(List<String> citiesIdList) {
+        String url = UrlBuilder.getWeatherUrlByCitiesId(citiesIdList);
+        ServerRequest<WeatherList> request = new ServerRequest<>(Request.Method.POST, url, WeatherList.class, successGetAllWeather, errorGetAllWeather);
         ServerRequest.getRequestQueue().add(request);
     }
 
