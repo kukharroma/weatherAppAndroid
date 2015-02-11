@@ -8,7 +8,10 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by romakukhar on 02.02.15.
  */
 @DatabaseTable(tableName = "detailDayTemp")
-public class DetailDayTemp {
+public class DetailDayWeatherTemp {
+
+    @DatabaseField(generatedId = true)
+    private int id;
 
     @DatabaseField(columnName = "day")
     @SerializedName("day")
@@ -33,6 +36,14 @@ public class DetailDayTemp {
     @DatabaseField(columnName = "morn")
     @SerializedName("morn")
     private double morn;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public double getDay() {
         return day;

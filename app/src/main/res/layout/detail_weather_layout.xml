@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent">
 
     <TextView
@@ -56,5 +57,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tv_detail_min_max_temp" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_detail_min_max_temp"
+        android:id="@+id/progressBar"
+        android:layout_marginTop="100dp"
+        android:layout_alignTop="@+id/chart"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -1,5 +1,5 @@
 #
-# generated on 2015/02/06 10:13:40
+# generated on 2015/02/11 02:33:27
 #
 # --table-start--
 dataClass=com.mlsdev.weather.model.Snow
@@ -39,38 +39,6 @@ columnName=minTemp
 # --field-start--
 fieldName=maxTemp
 columnName=maxTemp
-# --field-end--
-# --table-fields-end--
-# --table-end--
-#################################
-# --table-start--
-dataClass=com.mlsdev.weather.model.DayTemp
-tableName=dayTemp
-# --table-fields-start--
-# --field-start--
-fieldName=detailDayTemp
-foreign=true
-foreignAutoRefresh=true
-# --field-end--
-# --field-start--
-fieldName=date
-columnName=date
-# --field-end--
-# --field-start--
-fieldName=speed
-columnName=speed
-# --field-end--
-# --field-start--
-fieldName=clouds
-columnName=clouds
-# --field-end--
-# --field-start--
-fieldName=rain
-columnName=rain
-# --field-end--
-# --field-start--
-fieldName=snow
-columnName=snow
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -125,6 +93,41 @@ columnName=sunrise
 # --field-start--
 fieldName=sunset
 columnName=sunset
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.mlsdev.weather.model.DetailDayWeatherTemp
+tableName=detailDayTemp
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=day
+columnName=day
+# --field-end--
+# --field-start--
+fieldName=min
+columnName=min
+# --field-end--
+# --field-start--
+fieldName=max
+columnName=max
+# --field-end--
+# --field-start--
+fieldName=night
+columnName=night
+# --field-end--
+# --field-start--
+fieldName=eve
+columnName=eve
+# --field-end--
+# --field-start--
+fieldName=morn
+columnName=morn
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -189,6 +192,11 @@ foreignAutoCreate=true
 fieldName=weather
 dataPersister=SERIALIZABLE
 # --field-end--
+# --field-start--
+fieldName=dayTempList
+foreignCollection=true
+foreignCollectionMaxEagerLevel=2
+# --field-end--
 # --table-fields-end--
 # --table-end--
 #################################
@@ -216,6 +224,43 @@ columnName=icon
 # --table-end--
 #################################
 # --table-start--
+dataClass=com.mlsdev.weather.model.DayWeather
+tableName=dayTemp
+# --table-fields-start--
+# --field-start--
+fieldName=weather
+columnName=weather_id
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=detailDayWeatherTemp
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=date
+columnName=date
+# --field-end--
+# --field-start--
+fieldName=speed
+columnName=speed
+# --field-end--
+# --field-start--
+fieldName=clouds
+columnName=clouds
+# --field-end--
+# --field-start--
+fieldName=rain
+columnName=rain
+# --field-end--
+# --field-start--
+fieldName=snow
+columnName=snow
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
 dataClass=com.mlsdev.weather.model.Coordinates
 tableName=coordinates
 # --table-fields-start--
@@ -230,37 +275,6 @@ columnName=lon
 # --field-start--
 fieldName=lat
 columnName=lat
-# --field-end--
-# --table-fields-end--
-# --table-end--
-#################################
-# --table-start--
-dataClass=com.mlsdev.weather.model.DetailDayTemp
-tableName=detailDayTemp
-# --table-fields-start--
-# --field-start--
-fieldName=day
-columnName=day
-# --field-end--
-# --field-start--
-fieldName=min
-columnName=min
-# --field-end--
-# --field-start--
-fieldName=max
-columnName=max
-# --field-end--
-# --field-start--
-fieldName=night
-columnName=night
-# --field-end--
-# --field-start--
-fieldName=eve
-columnName=eve
-# --field-end--
-# --field-start--
-fieldName=morn
-columnName=morn
 # --field-end--
 # --table-fields-end--
 # --table-end--

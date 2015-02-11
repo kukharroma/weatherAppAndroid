@@ -1,7 +1,6 @@
 package com.mlsdev.weather.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -9,11 +8,14 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by romakukhar on 02.02.15.
  */
 @DatabaseTable(tableName = "dayTemp")
-public class DayTemp {
+public class DayWeather {
+
+    @DatabaseField(columnName = "weather_id", foreign = true)
+    private Weather weather;
 
     @SerializedName("temp")
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
-    private DetailDayTemp detailDayTemp;
+    private DetailDayWeatherTemp detailDayWeatherTemp;
 
     @DatabaseField(columnName = "date")
     @SerializedName("dt")
@@ -43,12 +45,20 @@ public class DayTemp {
         this.date = date;
     }
 
-    public DetailDayTemp getDetailDayTemp() {
-        return detailDayTemp;
+    public DetailDayWeatherTemp getDetailDayWeatherTemp() {
+        return detailDayWeatherTemp;
     }
 
-    public void setDetailDayTemp(DetailDayTemp detailDayTemp) {
-        this.detailDayTemp = detailDayTemp;
+    public void setDetailDayWeatherTemp(DetailDayWeatherTemp detailDayWeatherTemp) {
+        this.detailDayWeatherTemp = detailDayWeatherTemp;
+    }
+
+    public Weather getWeather() {
+        return weather;
+    }
+
+    public void setWeather(Weather weather) {
+        this.weather = weather;
     }
 
     public double getSpeed() {

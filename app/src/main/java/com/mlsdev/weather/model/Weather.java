@@ -4,8 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.text.SimpleDateFormat;
@@ -60,16 +62,16 @@ public class Weather implements Parcelable {
     @SerializedName("weather")
     private Description weather[];
 
-//    @ForeignCollectionField()
-//    private List<DayTemp> dayTempList;
+    @ForeignCollectionField(eager = false, maxEagerForeignCollectionLevel = 2)
+    private ForeignCollection<DayWeather> dayTempList;
 
-//    public List<DayTemp> getDayTempList() {
-//        return dayTempList;
-//    }
-//
-//    public void setDayTempList(List<DayTemp> dayTempList) {
-//        this.dayTempList = dayTempList;
-//    }
+    public ForeignCollection<DayWeather> getDayTempList() {
+        return dayTempList;
+    }
+
+    public void setDayTempList(ForeignCollection<DayWeather> dayTempList) {
+        this.dayTempList = dayTempList;
+    }
 
     public Description getFirstWeater() {
         return weather[0];
@@ -157,7 +159,7 @@ public class Weather implements Parcelable {
 
     }
 
-    public String getFormattedDate(){
+    public String getFormattedDate() {
         return dateFormat.format(new Date(Integer.parseInt(this.weatherTime)));
     }
 }

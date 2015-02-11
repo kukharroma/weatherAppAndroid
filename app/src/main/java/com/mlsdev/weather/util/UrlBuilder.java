@@ -43,7 +43,7 @@ public class UrlBuilder {
         return uriBuilder.toString();
     }
 
-    private static String getDailyWeather(String cityId, int dayCount) {
+    public static String getDailyWeather(String cityId, int dayCount) {
         Uri uriBuilder = Uri.parse(WeatherApi.MAIN_URL + FORECAST + "/" + DAILY).buildUpon()
                 .appendQueryParameter(QUERY_ID, cityId)
                 .appendQueryParameter(COUNT, String.valueOf(dayCount))

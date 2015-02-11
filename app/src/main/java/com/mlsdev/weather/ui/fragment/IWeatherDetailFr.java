@@ -7,5 +7,8 @@ public interface IWeatherDetailFr extends BaseFragment {
 
     public void updateDetailWeather();
 
+    public void showProgressBar();
+
+    public void dismissProgressBar();
 
 }

@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.utils.Legend;
+import com.github.mikephil.charting.utils.XLabels;
+import com.github.mikephil.charting.utils.YLabels;
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.ui.fragment.IWeatherDetailFr;
 
@@ -25,8 +29,11 @@ import mlsdev.com.weather.R;
 public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
 
     private Weather weather;
+
     private ProgressDialog progressDialog;
+    private LineChart chart;
     private TextView tvLocation, tvMainTemp, tvMainWeather, tvMainWeatherDescription, tvMinMaxTemp;
+    private ProgressBar progressBar;
 
     public WeatherDetailFr(Weather weather) {
         this.weather = weather;
@@ -52,46 +59,8 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
         tvMainWeather = (TextView) view.findViewById(R.id.tv_detail_main_weather);
         tvMainWeatherDescription = (TextView) view.findViewById(R.id.tv_detail_weather_description);
         tvMinMaxTemp = (TextView) view.findViewById(R.id.tv_detail_min_max_temp);
-        LineChart chart = (LineChart) view.findViewById(R.id.chart);
-
-        ArrayList<String> strings = new ArrayList<>();
-
-        strings.add("1");
-        strings.add("2");
-        strings.add("3");
-        strings.add("4");
-        strings.add("5");
-        strings.add("6");
-        strings.add("7");
-
-
-        Entry entry = new Entry(2.5f, 0);
-        Entry entry1 = new Entry(1.5f, 1);
-        Entry entry3 = new Entry(4.5f, 2);
-        Entry entry4 = new Entry(4.5f, 3);
-        Entry entry5 = new Entry(4.5f, 4);
-        Entry entry6 = new Entry(4.5f, 5);
-        Entry entry7 = new Entry(4.5f, 6);
-
-        ArrayList<Entry> arrayList = new ArrayList<>();
-        arrayList.add(entry);
-        arrayList.add(entry1);
-        arrayList.add(entry3);
-        arrayList.add(entry4);
-        arrayList.add(entry5);
-        arrayList.add(entry6);
-        arrayList.add(entry7);
-
-        LineDataSet set = new LineDataSet(arrayList, "LABEL");
-
-        LineData data = new LineData(strings, set);
-
-        chart.setTouchEnabled(false);
-        chart.setDrawYValues(false);
-        chart.setDescription("Updated");
-
-        chart.animateXY(3000, 3000);
-        chart.setData(data);
+        chart = (LineChart) view.findViewById(R.id.chart);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
     }
 
     @Override
@@ -101,7 +70,13 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
         tvMainWeather.setText(weather.getFirstWeater().getMain());
         tvMainWeatherDescription.setText(weather.getFirstWeater().getDescription());
         tvMinMaxTemp.setText(weather.getTemperature().getMinTemp() + getString(R.string.degree) + " / " + weather.getTemperature().getMaxTemp() + getString(R.string.degree));
-
+        if (weather.getDayTempList().isEmpty()) {
+            showProgressBar();
+            chart.setVisibility(View.GONE);
+        } else {
+            dismissProgressBar();
+            createChart();
+        }
     }
 
 
@@ -122,5 +97,65 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
     @Override
     public void dismissProgressDialog() {
         progressDialog.dismiss();
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void dismissProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    private void createChart() {
+        ArrayList<String> strings = new ArrayList<>();
+
+        strings.add("1");
+        strings.add("2");
+        strings.add("3");
+        strings.add("4");
+        strings.add("5");
+        strings.add("6");
+        strings.add("7");
+
+        ArrayList<Entry> arrayList = new ArrayList<>();
+
+        arrayList.add(new Entry(2.5f, 0));
+        arrayList.add(new Entry(9.5f, 1));
+        arrayList.add(new Entry(4.5f, 2));
+        arrayList.add(new Entry(-4.5f, 3));
+        arrayList.add(new Entry(-8.5f, 4));
+        arrayList.add(new Entry(-2.5f, 5));
+        arrayList.add(new Entry(-3.5f, 6));
+
+        LineDataSet set = new LineDataSet(arrayList, "set1");
+        set.setLineWidth(3f);
+        set.setCircleSize(5f);
+        set.setCircleColor(getActivity().getResources().getColor(R.color.red));
+
+        LineData data = new LineData(strings, set);
+        chart.setDescription("Updated");
+        chart.setData(data);
+
+        chart.setStartAtZero(false);
+
+        Legend l = chart.getLegend();
+        l.setFormSize(10f); // set the size of the legend forms/shapes
+        l.setForm(Legend.LegendForm.CIRCLE); // set what type of form/shape should be used
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
+        l.setXEntrySpace(5f); // set the space between the legend entries on the x-axis
+        l.setYEntrySpace(5f);
+
+        XLabels xl = chart.getXLabels();
+        xl.setPosition(XLabels.XLabelPosition.BOTTOM); // set the position
+        xl.setTextSize(12f); // set the textsize
+        xl.setSpaceBetweenLabels(3);
+
+
+        YLabels yl = chart.getYLabels();
+        yl.setPosition(YLabels.YLabelPosition.LEFT); // set the position
+        yl.setTextSize(12f); // set the textsize
     }
 }

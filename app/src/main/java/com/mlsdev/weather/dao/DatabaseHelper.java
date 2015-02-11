@@ -9,7 +9,9 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.mlsdev.weather.model.Clouds;
 import com.mlsdev.weather.model.Coordinates;
+import com.mlsdev.weather.model.DayWeather;
 import com.mlsdev.weather.model.Description;
+import com.mlsdev.weather.model.DetailDayWeatherTemp;
 import com.mlsdev.weather.model.Rain;
 import com.mlsdev.weather.model.Snow;
 import com.mlsdev.weather.model.Sys;
@@ -47,6 +49,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Temperature.class);
             TableUtils.createTable(connectionSource, Wind.class);
             TableUtils.createTable(connectionSource, Description.class);
+            TableUtils.createTable(connectionSource, DayWeather.class);
+            TableUtils.createTable(connectionSource, DetailDayWeatherTemp.class);
             Log.d(this.getClass().toString(), "database created");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,6 +70,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Temperature.class, true);
             TableUtils.dropTable(connectionSource, Wind.class, true);
             TableUtils.dropTable(connectionSource, Weather.class, true);
+            TableUtils.dropTable(connectionSource, DayWeather.class, true);
+            TableUtils.dropTable(connectionSource, DetailDayWeatherTemp.class, true);
             Log.d(this.getClass().toString(), "database dropped");
             onCreate(database, connectionSource);
         } catch (SQLException e) {
