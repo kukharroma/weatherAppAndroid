@@ -62,7 +62,7 @@ public class Weather implements Parcelable {
     @SerializedName("weather")
     private Description weather[];
 
-    @ForeignCollectionField(eager = false, maxEagerForeignCollectionLevel = 2)
+    @ForeignCollectionField(eager = true, maxEagerForeignCollectionLevel = 2)
     private ForeignCollection<DayWeather> dayTempList;
 
     public ForeignCollection<DayWeather> getDayTempList() {

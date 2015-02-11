@@ -10,8 +10,8 @@ public class DateUtil {
 
 
     public static String getDayName(String dateStr) {
-        Date todayDate = new Date(dateStr);
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+        Date todayDate = new Date(Long.parseLong(dateStr));
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EE");
         return dayFormat.format(todayDate);
     }
 }

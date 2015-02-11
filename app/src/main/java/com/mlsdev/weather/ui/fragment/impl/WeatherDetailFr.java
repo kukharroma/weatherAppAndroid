@@ -4,13 +4,11 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -21,6 +19,7 @@ import com.github.mikephil.charting.utils.XLabels;
 import com.github.mikephil.charting.utils.YLabels;
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.ui.fragment.IWeatherDetailFr;
+import com.mlsdev.weather.util.DateUtil;
 
 import java.util.ArrayList;
 
@@ -78,11 +77,11 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
             showProgressBar();
             chart.setVisibility(View.GONE);
         } else {
+            Toast.makeText(getActivity(), DateUtil.getDayName(weather.getWeatherTime()), Toast.LENGTH_LONG).show();
             dismissProgressBar();
             createChart();
         }
     }
-
 
 
     @Override
