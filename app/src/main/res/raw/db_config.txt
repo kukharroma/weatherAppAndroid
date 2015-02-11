@@ -1,5 +1,5 @@
 #
-# generated on 2015/02/11 02:33:27
+# generated on 2015/02/11 05:27:57
 #
 # --table-start--
 dataClass=com.mlsdev.weather.model.Snow
@@ -236,6 +236,8 @@ foreign=true
 fieldName=detailDayWeatherTemp
 foreign=true
 foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=1
+foreignAutoCreate=true
 # --field-end--
 # --field-start--
 fieldName=date

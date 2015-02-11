@@ -101,7 +101,7 @@ public class WeatherNetworkService implements IWeatherNetworkService {
         }
     };
 
-    private void getDailyWeather(String cityId, int count) {
+    public void getDailyWeather(String cityId, int count) {
         String url = UrlBuilder.getDailyWeather(cityId, count);
         ServerRequest<DailyWeatherList> request = new ServerRequest<>(Request.Method.POST, url, DailyWeatherList.class, successGetDailyWeather, errorGetDailyWeather);
         ServerRequest.getRequestQueue().add(request);

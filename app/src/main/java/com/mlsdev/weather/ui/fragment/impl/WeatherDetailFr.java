@@ -4,6 +4,9 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -70,6 +73,7 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
         tvMainWeather.setText(weather.getFirstWeater().getMain());
         tvMainWeatherDescription.setText(weather.getFirstWeater().getDescription());
         tvMinMaxTemp.setText(weather.getTemperature().getMinTemp() + getString(R.string.degree) + " / " + weather.getTemperature().getMaxTemp() + getString(R.string.degree));
+
         if (weather.getDayTempList().isEmpty()) {
             showProgressBar();
             chart.setVisibility(View.GONE);
@@ -78,6 +82,7 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
             createChart();
         }
     }
+
 
 
     @Override

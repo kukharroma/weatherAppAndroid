@@ -11,10 +11,14 @@ import com.j256.ormlite.table.DatabaseTable;
 public class DayWeather {
 
     @DatabaseField(columnName = "weather_id", foreign = true)
+    @SerializedName("o")
     private Weather weather;
 
+    @DatabaseField(generatedId = true)
+    private int id;
+
     @SerializedName("temp")
-    @DatabaseField(foreign = true, foreignAutoRefresh = true)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true, maxForeignAutoRefreshLevel = 1)
     private DetailDayWeatherTemp detailDayWeatherTemp;
 
     @DatabaseField(columnName = "date")
@@ -36,6 +40,14 @@ public class DayWeather {
     @DatabaseField(columnName = "snow")
     @SerializedName("snow")
     private double snow;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getDate() {
         return date;
