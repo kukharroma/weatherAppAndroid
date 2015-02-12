@@ -3,6 +3,7 @@ package com.mlsdev.weather.services.impl;
 import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.mlsdev.weather.dao.DaoManager;
+import com.mlsdev.weather.model.DayWeather;
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.services.IWeatherService;
 
@@ -33,12 +34,34 @@ public class WeatherService implements IWeatherService {
 
     @Override
     public void deleteAllWeathers() {
-        DaoManager.getWeatherRuntimeDao().delete(getAllWeathers());
+        DaoManager.getWeatherRuntimeDao().queryRaw("delete from weather ; " +
+                "delete from sys ;" +
+                "delete from coordinates ; " +
+                "delete from temperature;" +
+                "delete from wind; " +
+                "delete from clouds;" +
+                "delete from description; " +
+                "delete from detailDayTemp; " +
+                "delete from dayTemp; " +
+                "delete from rain; " +
+                "delete from snow;");
     }
 
     @Override
     public void deleteWeatherList(List<Weather> list) {
         DaoManager.getWeatherRuntimeDao().delete(list);
+        for (Weather weather : list) {
+            DaoManager.getWeatherRuntimeDao().queryRaw("delete from sys where idDB = " + weather.getSys().getIdDB() + ";" +
+                    "delete from coordinates where id = " + weather.getCoordinates().getId() + ";" +
+                    "delete from temperature where id = " + weather.getTemperature().getId() + ";" +
+                    "delete from wind where id = " + weather.getWind().getId() + ";" +
+                    "delete from clouds where id = " + weather.getClouds().getId() + ";" +
+                    "delete from description where id = " + weather.getFirstWeather().getId());
+            for (DayWeather dayWeather : weather.getDayTempList()) {
+                DaoManager.getWeatherRuntimeDao().queryRaw("delete from detailDayTemp where id = " + dayWeather.getId());
+            }
+            DaoManager.getWeatherRuntimeDao().queryRaw("delete from dayTemp where weather_id = " + weather.getId());
+        }
     }
 
     @Override

@@ -10,12 +10,9 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mlsdev.weather.model.Weather;
-import com.mlsdev.weather.services.impl.ServiceManager;
 import com.mlsdev.weather.ui.fragment.impl.WeatherListFr;
 import com.mlsdev.weather.ui.model.WeatherItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import mlsdev.com.weather.R;
@@ -90,8 +87,8 @@ public class WeatherItemAdapter extends BaseAdapter {
         tvMainTemp.setText(String.valueOf(item.getWeather().getTemperature().getTemp()) + context.getString(R.string.degree));
         tvWeatherTime.setText(item.getWeather().getFormattedDate());
         tvMinMaxTemp.setText(String.valueOf(item.getWeather().getTemperature().getMinTemp()) + context.getString(R.string.degree) + " / " + String.valueOf(item.getWeather().getTemperature().getMinTemp()) + context.getString(R.string.degree));
-        tvMainWeather.setText(item.getWeather().getFirstWeater().getMain());
-        tvDescriptionWeather.setText(item.getWeather().getFirstWeater().getDescription());
+        tvMainWeather.setText(item.getWeather().getFirstWeather().getMain());
+        tvDescriptionWeather.setText(item.getWeather().getFirstWeather().getDescription());
 
         if (isShowCheckBox) {
             cbDelete.setVisibility(View.VISIBLE);

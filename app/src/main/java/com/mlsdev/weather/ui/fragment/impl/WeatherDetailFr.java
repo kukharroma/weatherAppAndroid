@@ -76,8 +76,8 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
     public void fillComponents() {
         tvLocation.setText(weather.getCity() + " ," + weather.getSys().getCountry());
         tvMainTemp.setText(String.valueOf(weather.getTemperature().getTemp()) + getString(R.string.degree));
-        tvMainWeather.setText(weather.getFirstWeater().getMain());
-        tvMainWeatherDescription.setText(weather.getFirstWeater().getDescription());
+        tvMainWeather.setText(weather.getFirstWeather().getMain());
+        tvMainWeatherDescription.setText(weather.getFirstWeather().getDescription());
         tvMinMaxTemp.setText(weather.getTemperature().getMinTemp() + getString(R.string.degree) + " / " + weather.getTemperature().getMaxTemp() + getString(R.string.degree));
 
         if (weather.getDayTempList().isEmpty()) {
@@ -142,7 +142,6 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
         LineData data = new LineData(strings, set);
         chart.setDescription("Updated");
         chart.setData(data);
-
         chart.setStartAtZero(false);
 
         Legend l = chart.getLegend();

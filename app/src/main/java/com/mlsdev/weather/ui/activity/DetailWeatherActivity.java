@@ -93,7 +93,7 @@ public class DetailWeatherActivity extends BaseActivity {
         @Override
         public Fragment getItem(int position) {
             Weather weather = weatherList.get(position);
-            CURRENT_POSITION = position - 1;
+//            CURRENT_POSITION = position - 1;
             return new WeatherDetailFr(weather, getActivity());
         }
 

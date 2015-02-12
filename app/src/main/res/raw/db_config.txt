@@ -1,5 +1,5 @@
 #
-# generated on 2015/02/11 05:27:57
+# generated on 2015/02/12 11:49:20
 #
 # --table-start--
 dataClass=com.mlsdev.weather.model.Snow
@@ -195,6 +195,7 @@ dataPersister=SERIALIZABLE
 # --field-start--
 fieldName=dayTempList
 foreignCollection=true
+foreignCollectionEager=true
 foreignCollectionMaxEagerLevel=2
 # --field-end--
 # --table-fields-end--
@@ -231,6 +232,10 @@ tableName=dayTemp
 fieldName=weather
 columnName=weather_id
 foreign=true
+# --field-end--
+# --field-start--
+fieldName=id
+generatedId=true
 # --field-end--
 # --field-start--
 fieldName=detailDayWeatherTemp

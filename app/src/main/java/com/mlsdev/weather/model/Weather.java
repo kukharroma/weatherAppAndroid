@@ -23,7 +23,6 @@ public class Weather implements Parcelable {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM hh:mm");
 
     public Weather() {
-
     }
 
     @DatabaseField(id = true)
@@ -38,15 +37,15 @@ public class Weather implements Parcelable {
     @SerializedName("dt")
     private String weatherTime;
 
-    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnDefinition = "integer references coord(id) on delete cascade")
+    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnDefinition = "integer references coordinates(id) on delete cascade")
     @SerializedName("coord")
     private Coordinates coordinates;
 
-    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnDefinition = "integer references sys(id) on delete cascade")
+    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnDefinition = "integer references sys(idDB) on delete cascade")
     @SerializedName("sys")
     private Sys sys;
 
-    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnDefinition = "integer references main(id) on delete cascade")
+    @DatabaseField(foreign = true, foreignAutoCreate = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnDefinition = "integer references temperature(id) on delete cascade")
     @SerializedName("main")
     private Temperature temperature;
 
@@ -73,7 +72,7 @@ public class Weather implements Parcelable {
         this.dayTempList = dayTempList;
     }
 
-    public Description getFirstWeater() {
+    public Description getFirstWeather() {
         return weather[0];
     }
 
