@@ -101,9 +101,29 @@ public class WeatherNetworkService implements IWeatherNetworkService {
         }
     };
 
-    public void getDailyWeather(String cityId, int count) {
+    public void getDailyWeather(String cityId, int count, boolean isFirstLoad) {
         String url = UrlBuilder.getDailyWeather(cityId, count);
-        ServerRequest<DailyWeatherList> request = new ServerRequest<>(Request.Method.POST, url, DailyWeatherList.class, successGetDailyWeather, errorGetDailyWeather);
+        ServerRequest<DailyWeatherList> request = null;
+        if (isFirstLoad) {
+            request = new ServerRequest<>(Request.Method.POST, url, DailyWeatherList.class, successFirstLoadDailyWeather, errorFirstLoadDailyWeather);
+        } else {
+            request = new ServerRequest<>(Request.Method.POST, url, DailyWeatherList.class, successGetDailyWeather, errorGetDailyWeather);
+        }
         ServerRequest.getRequestQueue().add(request);
     }
+
+    private Response.Listener<DailyWeatherList> successFirstLoadDailyWeather = new Response.Listener<DailyWeatherList>() {
+        @Override
+        public void onResponse(DailyWeatherList dailyList) {
+            dailyListener.onSuccessLoadFirstDailyWeather(dailyList);
+        }
+    };
+
+    private Response.ErrorListener errorFirstLoadDailyWeather = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            dailyListener.onErrorFirstLoadDailyWeather("error");
+        }
+    };
+
 }

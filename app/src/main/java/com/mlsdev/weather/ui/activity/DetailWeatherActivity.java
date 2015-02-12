@@ -94,7 +94,7 @@ public class DetailWeatherActivity extends BaseActivity {
         public Fragment getItem(int position) {
             Weather weather = weatherList.get(position);
             CURRENT_POSITION = position - 1;
-            return new WeatherDetailFr(weather);
+            return new WeatherDetailFr(weather, getActivity());
         }
 
         @Override
@@ -125,4 +125,9 @@ public class DetailWeatherActivity extends BaseActivity {
     public void dismissProgressDialog() {
         progressDialog.dismiss();
     }
+
+    public DetailWeatherActivity getActivity() {
+        return this;
+    }
+
 }

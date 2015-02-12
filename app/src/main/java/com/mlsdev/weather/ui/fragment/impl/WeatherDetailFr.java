@@ -16,8 +16,12 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.Legend;
 import com.github.mikephil.charting.utils.XLabels;
 import com.github.mikephil.charting.utils.YLabels;
+import com.mlsdev.weather.model.DayWeather;
 import com.mlsdev.weather.model.Weather;
+import com.mlsdev.weather.presenter.WeatherDetailFrPresenter;
+import com.mlsdev.weather.ui.activity.DetailWeatherActivity;
 import com.mlsdev.weather.ui.fragment.IWeatherDetailFr;
+import com.mlsdev.weather.util.DateUtil;
 
 import java.util.ArrayList;
 
@@ -30,13 +34,18 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
 
     private Weather weather;
 
-    private ProgressDialog progressDialog;
     private LineChart chart;
     private TextView tvLocation, tvMainTemp, tvMainWeather, tvMainWeatherDescription, tvMinMaxTemp;
     private ProgressBar progressBar;
+    private ProgressDialog progressDialog;
 
-    public WeatherDetailFr(Weather weather) {
+    private DetailWeatherActivity activity;
+
+    private WeatherDetailFrPresenter presenter = new WeatherDetailFrPresenter(this);
+
+    public WeatherDetailFr(Weather weather, DetailWeatherActivity activity) {
         this.weather = weather;
+        this.activity = activity;
     }
 
     @Override
@@ -72,20 +81,16 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
         tvMinMaxTemp.setText(weather.getTemperature().getMinTemp() + getString(R.string.degree) + " / " + weather.getTemperature().getMaxTemp() + getString(R.string.degree));
 
         if (weather.getDayTempList().isEmpty()) {
-            showProgressBar();
-            chart.setVisibility(View.GONE);
+            presenter.loadDailyWeather(weather);
         } else {
             dismissProgressBar();
-            createChart();
+            createChart(weather);
         }
-
-
     }
 
-
     @Override
-    public void updateDetailWeather() {
-
+    public void updateDetailWeather(Weather weather) {
+        activity.updateViewPager(weather);
     }
 
     @Override
@@ -112,26 +117,22 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
         progressBar.setVisibility(View.GONE);
     }
 
-    private void createChart() {
+    public void showChart() {
+        chart.setVisibility(View.VISIBLE);
+    }
+
+    public void dismissChart() {
+        chart.setVisibility(View.GONE);
+    }
+
+    private void createChart(Weather weather) {
         ArrayList<String> strings = new ArrayList<>();
-
-        strings.add("1");
-        strings.add("2");
-        strings.add("3");
-        strings.add("4");
-        strings.add("5");
-        strings.add("6");
-        strings.add("7");
-
         ArrayList<Entry> arrayList = new ArrayList<>();
 
-        arrayList.add(new Entry(2.5f, 0));
-        arrayList.add(new Entry(9.5f, 1));
-        arrayList.add(new Entry(4.5f, 2));
-        arrayList.add(new Entry(-4.5f, 3));
-        arrayList.add(new Entry(-8.5f, 4));
-        arrayList.add(new Entry(-2.5f, 5));
-        arrayList.add(new Entry(-3.5f, 6));
+        for (DayWeather day : weather.getDayTempList()) {
+            strings.add(DateUtil.getDayName(day.getDate()));
+            arrayList.add(new Entry((float) day.getDetailDayWeatherTemp().getDay(), arrayList.size()));
+        }
 
         LineDataSet set = new LineDataSet(arrayList, "set1");
         set.setLineWidth(3f);
@@ -155,7 +156,6 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
         xl.setPosition(XLabels.XLabelPosition.BOTTOM); // set the position
         xl.setTextSize(12f); // set the textsize
         xl.setSpaceBetweenLabels(3);
-
 
         YLabels yl = chart.getYLabels();
         yl.setPosition(YLabels.YLabelPosition.LEFT); // set the position

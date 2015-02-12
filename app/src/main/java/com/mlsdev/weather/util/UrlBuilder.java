@@ -47,6 +47,7 @@ public class UrlBuilder {
         Uri uriBuilder = Uri.parse(WeatherApi.MAIN_URL + FORECAST + "/" + DAILY).buildUpon()
                 .appendQueryParameter(QUERY_ID, cityId)
                 .appendQueryParameter(COUNT, String.valueOf(dayCount))
+                .appendQueryParameter(QUERY_UNITS, UNITS)
                 .build();
         return uriBuilder.toString();
     }
