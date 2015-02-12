@@ -51,14 +51,15 @@ public class WeatherService implements IWeatherService {
     public void deleteWeatherList(List<Weather> list) {
         DaoManager.getWeatherRuntimeDao().delete(list);
         for (Weather weather : list) {
+            // todo deleting all tables
             DaoManager.getWeatherRuntimeDao().queryRaw("delete from sys where idDB = " + weather.getSys().getIdDB() + ";" +
-                    "delete from coordinates where id = " + weather.getCoordinates().getId() + ";" +
-                    "delete from temperature where id = " + weather.getTemperature().getId() + ";" +
-                    "delete from wind where id = " + weather.getWind().getId() + ";" +
-                    "delete from clouds where id = " + weather.getClouds().getId() + ";" +
+                    "delete from coordinates where id = " + weather.getCoordinates().getId() + " ; " +
+                    "delete from temperature where id = " + weather.getTemperature().getId() + " ; " +
+                    "delete from wind where id = " + weather.getWind().getId() + " ; " +
+                    "delete from clouds where id = " + weather.getClouds().getId() + " ; " +
                     "delete from description where id = " + weather.getFirstWeather().getId());
             for (DayWeather dayWeather : weather.getDayTempList()) {
-                DaoManager.getWeatherRuntimeDao().queryRaw("delete from detailDayTemp where id = " + dayWeather.getId());
+                DaoManager.getWeatherRuntimeDao().queryRaw("delete from detailDayTemp where id = " + dayWeather.getDetailDayWeatherTemp().getId());
             }
             DaoManager.getWeatherRuntimeDao().queryRaw("delete from dayTemp where weather_id = " + weather.getId());
         }
