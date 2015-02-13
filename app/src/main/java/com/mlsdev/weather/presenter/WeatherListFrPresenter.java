@@ -74,17 +74,9 @@ public class WeatherListFrPresenter implements BaseWeatherListener {
         weatherNetworkService.getWeatherByCity(cityName);
     }
 
-    public void loadAllWeathers() {
-        WeatherListFr context = (WeatherListFr) weatherListFr;
-        weatherListFr.showProgressDialog(context.getString(R.string.pb_load_weather_tittle), context.getString(R.string.pb_wait_message));
-        List<String> citiesId = ServiceManager.getWeatherService().getCitiesId();
-        weatherNetworkService.getWeatherByCitiesId(citiesId);
-    }
-
     @Override
     public void onSuccessGetWeatherByCity(Weather weather) {
-        ServiceManager.getWeatherService().createWeather(weather);
-//        ServiceManager.getWeatherService().createOrUpdateWeather(weather);
+        ServiceManager.getWeatherService().createOrUpdateWeather(weather);
         weatherListFr.onSuccessAddWeather();
         weatherListFr.dismissProgressDialog();
     }
@@ -95,9 +87,16 @@ public class WeatherListFrPresenter implements BaseWeatherListener {
         weatherListFr.onErrorAddWeather(error);
     }
 
+    public void loadAllWeathers() {
+        WeatherListFr context = (WeatherListFr) weatherListFr;
+        weatherListFr.showProgressDialog(context.getString(R.string.pb_load_weather_tittle), context.getString(R.string.pb_wait_message));
+        List<String> citiesId = ServiceManager.getWeatherService().getCitiesId();
+        weatherNetworkService.getWeatherByCitiesId(citiesId);
+    }
+
+
     @Override
     public void onSuccessGetAllWeathers(WeatherList weatherList) {
-        ServiceManager.getWeatherService().deleteAllWeather();
         ServiceManager.getWeatherService().updateWeathers(weatherList.getList());
 
         weatherListFr.onSuccessUpdateAllWeather();

@@ -1,5 +1,6 @@
 package com.mlsdev.weather.services;
 
+import com.mlsdev.weather.model.DayWeather;
 import com.mlsdev.weather.model.Weather;
 
 import java.util.List;
@@ -14,6 +15,14 @@ public interface IWeatherService {
     public void createOrUpdateWeather(Weather weather);
 
     public void deleteWeather(Weather weather);
+
+    public void createOrUpdateDailyWeather(Weather weather, List<DayWeather> list);
+
+    public void createDailyWeather(Weather weather, List<DayWeather> list);
+
+    public void updateDailyWeather(Weather weather, List<DayWeather> list);
+
+    public void deleteDailyWeather(Weather weather);
 
     public void deleteAllWeather();
 

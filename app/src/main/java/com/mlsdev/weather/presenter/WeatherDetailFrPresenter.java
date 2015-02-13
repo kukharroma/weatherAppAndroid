@@ -40,9 +40,7 @@ public class WeatherDetailFrPresenter implements WeatherDailyListener {
 
     @Override
     public void onSuccessGetDailyWeather(DailyWeatherList dailyList) {
-        weather.getDayTempList().clear();
-        weather.getDayTempList().addAll(dailyList.getList());
-        ServiceManager.getWeatherService().createOrUpdateWeather(weather);
+        ServiceManager.getWeatherService().createOrUpdateDailyWeather(weather, dailyList.getList());
         activity.updateViewPager(weather);
         activity.dismissProgressDialog();
     }
@@ -61,9 +59,7 @@ public class WeatherDetailFrPresenter implements WeatherDailyListener {
 
     @Override
     public void onSuccessFirstLoadDailyWeather(DailyWeatherList dailyList) {
-        weather.getDayTempList().clear();
-        weather.getDayTempList().addAll(dailyList.getList());
-        ServiceManager.getWeatherService().createOrUpdateWeather(weather);
+        ServiceManager.getWeatherService().createDailyWeather(weather, dailyList.getList());
         weatherDetailFr.updateDetailWeather(weather);
     }
 

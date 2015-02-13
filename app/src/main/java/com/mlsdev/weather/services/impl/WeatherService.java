@@ -2,6 +2,7 @@ package com.mlsdev.weather.services.impl;
 
 import com.mlsdev.weather.dao.DaoManager;
 import com.mlsdev.weather.dao.WeatherDao;
+import com.mlsdev.weather.model.DayWeather;
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.services.IWeatherService;
 
@@ -19,7 +20,7 @@ public class WeatherService implements IWeatherService {
         weatherDao.createWeather(weather);
     }
 
-    public void updateWeather(Weather weather){
+    public void updateWeather(Weather weather) {
         weatherDao.updateWeather(weather);
     }
 
@@ -31,6 +32,26 @@ public class WeatherService implements IWeatherService {
     @Override
     public void updateWeathers(List<Weather> weathers) {
         weatherDao.updateWeathers(weathers);
+    }
+
+    @Override
+    public void createOrUpdateDailyWeather(Weather weather, List<DayWeather> list) {
+        weatherDao.createOrUpdateDailyWeather(weather, list);
+    }
+
+    @Override
+    public void createDailyWeather(Weather weather, List<DayWeather> list) {
+        weatherDao.createDailyWeather(weather, list);
+    }
+
+    @Override
+    public void updateDailyWeather(Weather weather, List<DayWeather> list) {
+        weatherDao.updateDailyWeather(weather, list);
+    }
+
+    @Override
+    public void deleteDailyWeather(Weather weather) {
+        weatherDao.deleteDailyWeather(weather);
     }
 
     @Override
@@ -54,7 +75,6 @@ public class WeatherService implements IWeatherService {
     public List<Weather> getAllWeathers() {
         return weatherDao.getAllWeathers();
     }
-
 
     @Override
     public Weather getWeatherById(int id) {
