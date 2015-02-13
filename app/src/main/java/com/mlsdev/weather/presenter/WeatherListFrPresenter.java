@@ -100,7 +100,7 @@ public class WeatherListFrPresenter implements BaseWeatherListener {
 
     @Override
     public void onSuccessGetAllWeathers(WeatherList weatherList) {
-        ServiceManager.getWeatherService().deleteAllWeathers();
+        ServiceManager.getWeatherService().deleteAllWeather();
         ServiceManager.getWeatherService().updateWeathers(weatherList.getList());
 
         weatherListFr.onSuccessUpdateAllWeather();

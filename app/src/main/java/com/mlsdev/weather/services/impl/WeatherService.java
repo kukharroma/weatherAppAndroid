@@ -15,13 +15,22 @@ public class WeatherService implements IWeatherService {
     private WeatherDao weatherDao = DaoManager.getWeatherDao();
 
     @Override
-    public void saveWeather(Weather weather) {
+    public void createWeather(Weather weather) {
         weatherDao.createWeather(weather);
+    }
+
+    public void updateWeather(Weather weather){
+        weatherDao.updateWeather(weather);
     }
 
     @Override
     public void createOrUpdateWeather(Weather weather) {
+        weatherDao.createOrUpdateWeather(weather);
+    }
 
+    @Override
+    public void updateWeathers(List<Weather> weathers) {
+        weatherDao.updateWeathers(weathers);
     }
 
     @Override
@@ -30,28 +39,20 @@ public class WeatherService implements IWeatherService {
     }
 
     @Override
-    public void deleteAllWeathers() {
+    public void deleteAllWeather() {
         weatherDao.deleteAllWeather();
     }
 
     @Override
     public void deleteWeatherList(List<Weather> list) {
         for (Weather weather : list) {
-            ServiceManager.getWeatherService().deleteWeather(weather);
-        }
-    }
-
-    @Override
-    public void updateWeathers(List<Weather> weathers) {
-        for (Weather weather : weathers) {
             weatherDao.deleteWeather(weather);
-            weatherDao.createWeather(weather);
         }
     }
 
     @Override
     public List<Weather> getAllWeathers() {
-        return DaoManager.getWeatherRuntimeDao().queryForAll();
+        return weatherDao.getAllWeathers();
     }
 
 

@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface IWeatherService {
 
-    public void saveWeather(Weather weather);
+    public void createWeather(Weather weather);
 
     public void createOrUpdateWeather(Weather weather);
 
     public void deleteWeather(Weather weather);
 
-    public void deleteAllWeathers();
+    public void deleteAllWeather();
 
     public void deleteWeatherList(List<Weather> weathers);
 

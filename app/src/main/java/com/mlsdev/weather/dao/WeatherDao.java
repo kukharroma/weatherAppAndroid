@@ -25,6 +25,14 @@ public class WeatherDao {
 
     }
 
+    public void createOrUpdateWeather(Weather weather) {
+
+    }
+
+    public void updateWeathers(List<Weather> weathers) {
+
+    }
+
     public void deleteWeather(Weather weather) {
         weatherRuntimeDao.queryRaw("delete from clouds where id = " + weather.getClouds().getId());
         weatherRuntimeDao.queryRaw("delete from coordinates where id = " + weather.getCoordinates().getId());
@@ -51,6 +59,10 @@ public class WeatherDao {
         weatherRuntimeDao.queryRaw("delete from snow");
         weatherRuntimeDao.queryRaw("delete from sys");
         weatherRuntimeDao.queryRaw("delete from wind");
+    }
+
+    public List<Weather> getAllWeathers() {
+        return weatherRuntimeDao.queryForAll();
     }
 
     public Weather getWeatherById(int id) {
@@ -81,7 +93,7 @@ public class WeatherDao {
         return weather;
     }
 
-    public List<String> getCitiesId(){
+    public List<String> getCitiesId() {
         List<String> resultList = new ArrayList<>();
         try {
             QueryBuilder<Weather, Integer> queryBuilder = weatherRuntimeDao.queryBuilder();
