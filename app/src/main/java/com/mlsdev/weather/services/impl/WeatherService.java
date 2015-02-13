@@ -37,22 +37,22 @@ public class WeatherService implements IWeatherService {
         DaoManager.getWeatherRuntimeDao().queryRaw("delete from weather ; " +
                 "delete from sys ;" +
                 "delete from coordinates ; " +
-                "delete from temperature;" +
-                "delete from wind; " +
-                "delete from clouds;" +
-                "delete from description; " +
-                "delete from detailDayTemp; " +
-                "delete from dayTemp; " +
-                "delete from rain; " +
-                "delete from snow;");
+                "delete from temperature ;" +
+                "delete from wind ; " +
+                "delete from clouds ;" +
+                "delete from description ; " +
+                "delete from detailDayTemp ; " +
+                "delete from dayTemp ; " +
+                "delete from rain ; " +
+                "delete from snow ;");
     }
 
     @Override
     public void deleteWeatherList(List<Weather> list) {
-        DaoManager.getWeatherRuntimeDao().delete(list);
+//        DaoManager.getWeatherRuntimeDao().delete(list);
         for (Weather weather : list) {
             // todo deleting all tables
-            DaoManager.getWeatherRuntimeDao().queryRaw("delete from sys where idDB = " + weather.getSys().getIdDB() + ";" +
+            DaoManager.getWeatherRuntimeDao().queryRaw("delete from sys where idDB = " + weather.getSys().getIdDB() + " ; " +
                     "delete from coordinates where id = " + weather.getCoordinates().getId() + " ; " +
                     "delete from temperature where id = " + weather.getTemperature().getId() + " ; " +
                     "delete from wind where id = " + weather.getWind().getId() + " ; " +

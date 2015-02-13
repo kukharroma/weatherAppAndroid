@@ -15,7 +15,12 @@ public class DaoManager {
     private static DaoManager daoManager = null;
     private static DatabaseHelper databaseHelper = null;
 
-    private static RuntimeExceptionDao<Weather, Integer> weatherDao;
+    private static WeatherDao weatherDao;
+    private static RuntimeExceptionDao<Weather, Integer> runtimeExceptionDao;
+
+    public static DatabaseHelper getDatabaseHelper() {
+        return databaseHelper;
+    }
 
     public DaoManager getManager() {
         if (daoManager == null || databaseHelper == null) {
@@ -30,13 +35,16 @@ public class DaoManager {
     }
 
     public static RuntimeExceptionDao<Weather, Integer> getWeatherRuntimeDao() {
-        if (weatherDao == null) {
-            weatherDao = getDatabaseHelper().getRuntimeExceptionDao(Weather.class);
+        if (runtimeExceptionDao == null) {
+            runtimeExceptionDao = getDatabaseHelper().getRuntimeExceptionDao(Weather.class);
         }
-        return weatherDao;
+        return runtimeExceptionDao;
     }
 
-    public static DatabaseHelper getDatabaseHelper() {
-        return databaseHelper;
+    public static WeatherDao getWeatherDao() {
+        if (weatherDao == null) {
+            weatherDao = new WeatherDao();
+        }
+        return weatherDao;
     }
 }
