@@ -18,7 +18,7 @@ import java.util.Date;
  */
 
 @DatabaseTable(tableName = "weather")
-public class Weather implements Parcelable {
+public class Weather  {
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM hh:mm");
 
@@ -148,15 +148,15 @@ public class Weather implements Parcelable {
         this.clouds = clouds;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-    }
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel(Parcel dest, int flags) {
+//
+//    }
 
     public String getFormattedDate() {
         return dateFormat.format(new Date(Integer.parseInt(this.weatherTime)));

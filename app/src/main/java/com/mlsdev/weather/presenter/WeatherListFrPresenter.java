@@ -83,8 +83,11 @@ public class WeatherListFrPresenter implements BaseWeatherListener {
 
     @Override
     public void onSuccessGetWeatherByCity(Weather weather) {
-        // todo deleting !!! NOT UPDATING then create
-        ServiceManager.getWeatherService().createOrUpdateWeather(weather);
+        Weather oldWeather = ServiceManager.getWeatherService().getWeatherById(weather.getId());
+        ServiceManager.getWeatherService().deleteWeather(oldWeather);
+
+        ServiceManager.getWeatherService().saveWeather(weather);
+//        ServiceManager.getWeatherService().createOrUpdateWeather(weather);
         weatherListFr.onSuccessAddWeather();
         weatherListFr.dismissProgressDialog();
     }
