@@ -52,7 +52,7 @@ public class WeatherDetailFrPresenter implements WeatherDailyListener {
         activity.dismissProgressDialog();
     }
 
-    public void loadDailyWeather(Weather weather) {
+    public void firstLoadDailyWeather(Weather weather) {
         this.weather = weather;
         weatherDetailFr.dismissChart();
         weatherDetailFr.showProgressBar();
@@ -60,7 +60,7 @@ public class WeatherDetailFrPresenter implements WeatherDailyListener {
     }
 
     @Override
-    public void onSuccessLoadFirstDailyWeather(DailyWeatherList dailyList) {
+    public void onSuccessFirstLoadDailyWeather(DailyWeatherList dailyList) {
         weather.getDayTempList().clear();
         weather.getDayTempList().addAll(dailyList.getList());
         ServiceManager.getWeatherService().createOrUpdateWeather(weather);

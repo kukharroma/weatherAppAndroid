@@ -115,7 +115,7 @@ public class WeatherNetworkService implements IWeatherNetworkService {
     private Response.Listener<DailyWeatherList> successFirstLoadDailyWeather = new Response.Listener<DailyWeatherList>() {
         @Override
         public void onResponse(DailyWeatherList dailyList) {
-            dailyListener.onSuccessLoadFirstDailyWeather(dailyList);
+            dailyListener.onSuccessFirstLoadDailyWeather(dailyList);
         }
     };
 

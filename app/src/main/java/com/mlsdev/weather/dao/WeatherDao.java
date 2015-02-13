@@ -4,6 +4,7 @@ import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.mlsdev.weather.model.DayWeather;
 import com.mlsdev.weather.model.Weather;
 
 import java.sql.SQLException;
@@ -22,6 +23,19 @@ public class WeatherDao {
     }
 
     public void updateWeather(Weather weather) {
+        Weather oldWeather = getWeatherById(weather.getId());
+        weather.getCoordinates().setId(oldWeather.getCoordinates().getId());
+        weather.getSys().setId(oldWeather.getSys().getId());
+        weather.getTemperature().setId(oldWeather.getTemperature().getId());
+        weather.getWind().setId(oldWeather.getWind().getId());
+        weather.getClouds().setId(oldWeather.getClouds().getId());
+        weather.getFirstWeather().setId(oldWeather.getFirstWeather().getId());
+        for (DayWeather dayWeather : weather.getDayTempList()) {
+            weatherRuntimeDao.queryRaw("delete from detailDayTemp where id = " + dayWeather.getId());
+        }
+    }
+
+    public void updateDailyWeather(List<DayWeather> list){
 
     }
 
@@ -34,16 +48,19 @@ public class WeatherDao {
     }
 
     public void deleteWeather(Weather weather) {
+        // todo fix deleting dayTemp and detailDayTemp and other id's
         weatherRuntimeDao.queryRaw("delete from clouds where id = " + weather.getClouds().getId());
         weatherRuntimeDao.queryRaw("delete from coordinates where id = " + weather.getCoordinates().getId());
-        weatherRuntimeDao.queryRaw("delete from dayTemp where id = " + weather.getCoordinates().getId());
-        weatherRuntimeDao.queryRaw("delete from description where id = " + weather.getCoordinates().getId());
-        weatherRuntimeDao.queryRaw("delete from detailDayTemp where id = " + weather.getCoordinates().getId());
-        weatherRuntimeDao.queryRaw("delete from rain where id = " + weather.getCoordinates().getId());
-        weatherRuntimeDao.queryRaw("delete from snow where idDB = " + weather.getSys().getIdDB());
-        weatherRuntimeDao.queryRaw("delete from sys where id = " + weather.getTemperature().getId());
-        weatherRuntimeDao.queryRaw("delete from temperature where id = " + weather.getClouds().getId());
-        weatherRuntimeDao.queryRaw("delete from wind where id = " + weather.getClouds().getId());
+        weatherRuntimeDao.queryRaw("delete from dayTemp where weather_id = " + weather.getId());
+
+        for (DayWeather dayWeather : weather.getDayTempList()) {
+            weatherRuntimeDao.queryRaw("delete from detailDayTemp where id = " + dayWeather.getId());
+        }
+
+        weatherRuntimeDao.queryRaw("delete from description where id = " + weather.getFirstWeather().getId());
+        weatherRuntimeDao.queryRaw("delete from sys where idDB = " + weather.getSys().getId());
+        weatherRuntimeDao.queryRaw("delete from temperature where id = " + weather.getTemperature().getId());
+        weatherRuntimeDao.queryRaw("delete from wind where id = " + weather.getWind().getId());
         weatherRuntimeDao.queryRaw("delete from weather where id = " + weather.getId());
     }
 

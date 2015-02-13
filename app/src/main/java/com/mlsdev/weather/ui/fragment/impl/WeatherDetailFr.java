@@ -81,7 +81,7 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
         tvMinMaxTemp.setText(weather.getTemperature().getMinTemp() + getString(R.string.degree) + " / " + weather.getTemperature().getMaxTemp() + getString(R.string.degree));
 
         if (weather.getDayTempList().isEmpty()) {
-            presenter.loadDailyWeather(weather);
+            presenter.firstLoadDailyWeather(weather);
         } else {
             dismissProgressBar();
             createChart(weather);

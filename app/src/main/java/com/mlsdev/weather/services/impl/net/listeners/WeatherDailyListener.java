@@ -11,7 +11,7 @@ public interface WeatherDailyListener {
 
     public void onErrorGetDailyWeather(String error);
 
-    public void onSuccessLoadFirstDailyWeather(DailyWeatherList dailyList);
+    public void onSuccessFirstLoadDailyWeather(DailyWeatherList dailyList);
 
     public void onErrorFirstLoadDailyWeather(String error);
 }
