@@ -2,6 +2,7 @@ package com.mlsdev.weather.services.impl;
 
 import android.content.Context;
 
+import com.mlsdev.weather.services.IWeatherService;
 import com.mlsdev.weather.services.impl.net.WeatherNetworkService;
 
 /**
@@ -18,7 +19,7 @@ public class ServiceManager {
         }
     }
 
-    public static WeatherService getWeatherService() {
+    public static IWeatherService getWeatherService() {
         if (weatherService == null) {
             weatherService = new WeatherService();
         }

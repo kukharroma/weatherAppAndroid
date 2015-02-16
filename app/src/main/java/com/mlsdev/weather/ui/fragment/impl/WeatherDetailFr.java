@@ -10,20 +10,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.utils.Legend;
-import com.github.mikephil.charting.utils.XLabels;
-import com.github.mikephil.charting.utils.YLabels;
-import com.mlsdev.weather.model.DayWeather;
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.presenter.WeatherDetailFrPresenter;
 import com.mlsdev.weather.ui.activity.DetailWeatherActivity;
 import com.mlsdev.weather.ui.fragment.IWeatherDetailFr;
-import com.mlsdev.weather.util.DateUtil;
-
-import java.util.ArrayList;
+import com.mlsdev.weather.ui.util.ChartUtil;
 
 import mlsdev.com.weather.R;
 
@@ -126,38 +117,6 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
     }
 
     private void createChart(Weather weather) {
-        ArrayList<String> strings = new ArrayList<>();
-        ArrayList<Entry> arrayList = new ArrayList<>();
-
-        for (DayWeather day : weather.getDayTempList()) {
-            strings.add(DateUtil.getDayName(day.getDate()));
-            arrayList.add(new Entry((float) day.getDetailDayWeatherTemp().getDay(), arrayList.size()));
-        }
-
-        LineDataSet set = new LineDataSet(arrayList, "set1");
-        set.setLineWidth(3f);
-        set.setCircleSize(5f);
-        set.setCircleColor(getActivity().getResources().getColor(R.color.red));
-
-        LineData data = new LineData(strings, set);
-        chart.setDescription("Updated");
-        chart.setData(data);
-        chart.setStartAtZero(false);
-
-        Legend l = chart.getLegend();
-        l.setFormSize(10f); // set the size of the legend forms/shapes
-        l.setForm(Legend.LegendForm.CIRCLE); // set what type of form/shape should be used
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
-        l.setXEntrySpace(5f); // set the space between the legend entries on the x-axis
-        l.setYEntrySpace(5f);
-
-        XLabels xl = chart.getXLabels();
-        xl.setPosition(XLabels.XLabelPosition.BOTTOM); // set the position
-        xl.setTextSize(12f); // set the textsize
-        xl.setSpaceBetweenLabels(3);
-
-        YLabels yl = chart.getYLabels();
-        yl.setPosition(YLabels.YLabelPosition.LEFT); // set the position
-        yl.setTextSize(12f); // set the textsize
+        ChartUtil.getInstance().drawWeatherChart(chart, weather);
     }
 }
