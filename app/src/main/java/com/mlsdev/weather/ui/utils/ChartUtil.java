@@ -74,7 +74,7 @@ public class ChartUtil {
         yl.setPosition(YLabels.YLabelPosition.LEFT); // set the position
         yl.setTextSize(20f); // set the textsize
 
-        chart.setValueTextSize(25f);
+        chart.setValueTextSize(10f);
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, int dataSetIndex) {

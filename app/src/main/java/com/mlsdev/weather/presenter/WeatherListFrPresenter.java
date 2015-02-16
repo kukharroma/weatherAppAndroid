@@ -105,7 +105,6 @@ public class WeatherListFrPresenter implements BaseWeatherListener {
         weatherNetworkService.getWeatherByCitiesId(citiesId);
     }
 
-
     @Override
     public void onSuccessGetAllWeathers(WeatherList weatherList) {
         ServiceManager.getWeatherService().updateWeathers(weatherList.getList());

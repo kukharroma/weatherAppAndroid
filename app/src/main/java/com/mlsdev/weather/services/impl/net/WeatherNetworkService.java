@@ -12,6 +12,7 @@ import com.mlsdev.weather.services.impl.net.listeners.WeatherDailyListener;
 import com.mlsdev.weather.services.net.IWeatherNetworkService;
 import com.mlsdev.weather.util.UrlBuilder;
 
+import java.util.Date;
 import java.util.List;
 
 /**

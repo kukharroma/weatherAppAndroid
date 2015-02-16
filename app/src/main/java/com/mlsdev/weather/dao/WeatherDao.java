@@ -9,6 +9,7 @@ import com.mlsdev.weather.model.Weather;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class WeatherDao {
     private RuntimeExceptionDao<Weather, Integer> weatherRuntimeDao = DaoManager.getWeatherRuntimeDao();
 
     public void createWeather(Weather weather) {
+        weather.setWeatherTime(String.valueOf(new Date().getTime()));
         weatherRuntimeDao.create(weather);
     }
 
@@ -31,8 +33,9 @@ public class WeatherDao {
         weather.getWind().setId(oldWeather.getWind().getId());
         weather.getClouds().setId(oldWeather.getClouds().getId());
         weather.getFirstWeather().setId(oldWeather.getFirstWeather().getId());
+        weather.setWeatherTime(String.valueOf(new Date().getTime()));
 
-        weatherRuntimeDao.createOrUpdate(weather);
+        weatherRuntimeDao.update(weather);
     }
 
     public void createOrUpdateWeather(Weather weather) {

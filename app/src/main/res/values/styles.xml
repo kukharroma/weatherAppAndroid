@@ -9,7 +9,6 @@
     <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
 
-        <item name="android:windowNoTitle">true</item>
         <!--We will be using the toolbar so no need to show ActionBar-->
         <item name="android:windowActionBar">false</item>
         <!--Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
@@ -22,6 +21,7 @@
         <item name="colorAccent">#FF4081</item>
         <!-- You can also set colorControlNormal, colorControlActivated
              colorControlHighlight and colorSwitchThumbNormal. -->
+
     </style>
 
     <style name="OverflowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">

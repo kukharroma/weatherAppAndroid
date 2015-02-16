@@ -149,7 +149,7 @@ public class Weather {
     }
 
     public String getFormattedDate() {
-        return dateFormat.format(new Date(Long.parseLong(this.weatherTime) * 1000));
+        return dateFormat.format(new Date(Long.parseLong(this.weatherTime)));
     }
 
     public int getCode() {

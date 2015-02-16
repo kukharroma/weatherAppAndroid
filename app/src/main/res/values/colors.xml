@@ -3,4 +3,10 @@
     <color name="red">#C1272D</color>
 
     <color name="back">#FF49C114</color>
+
+    <color name="dark_blue">#273594</color>
+    <color name="light_blue">#3778D2</color>
+    <color name="mo4a">#EDD6B4</color>
+    <color name="pe4al">#C77065</color>
+    <color name="text_color">#C0C2C2</color>
 </resources>
