@@ -41,6 +41,7 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
 
     private static final int ADD_CITY_REQUEST_CODE = 1;
     public static boolean IS_ANY_ITEM_DELETE_CHECKED;
+    public static boolean IS_ANY_CITY_ADDED;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,8 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
         menu.clear();
         if (IS_ANY_ITEM_DELETE_CHECKED) {
             getActivity().getMenuInflater().inflate(R.menu.delete_item_done_menu, menu);
+        } else if (IS_ANY_CITY_ADDED) {
+            getActivity().getMenuInflater().inflate(R.menu.delete_or_update_all_menu, menu);
         } else {
             getActivity().getMenuInflater().inflate(R.menu.main_weather_menu, menu);
         }
@@ -110,6 +113,7 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
 
     @Override
     public void updateWeatherList(List<WeatherItem> weatherItems) {
+        getActivity().invalidateOptionsMenu();
         weatherItemList = weatherItems;
         adapter.updateList(weatherItems);
     }

@@ -1,10 +1,12 @@
-package com.mlsdev.weather.ui.util;
+package com.mlsdev.weather.ui.utils;
 
-import com.github.mikephil.charting.charts.Chart;
+import android.widget.Toast;
+
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.Legend;
 import com.github.mikephil.charting.utils.XLabels;
 import com.github.mikephil.charting.utils.YLabels;
@@ -13,6 +15,7 @@ import com.mlsdev.weather.model.DayWeather;
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.util.DateUtil;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 import mlsdev.com.weather.R;
@@ -69,6 +72,20 @@ public class ChartUtil {
 
         YLabels yl = chart.getYLabels();
         yl.setPosition(YLabels.YLabelPosition.LEFT); // set the position
-        yl.setTextSize(12f); // set the textsize
+        yl.setTextSize(20f); // set the textsize
+
+        chart.setValueTextSize(25f);
+        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, int dataSetIndex) {
+                Toast.makeText(WeatherApp.getInstance(),"TouchMe baby", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+
     }
 }

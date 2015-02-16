@@ -14,7 +14,7 @@ import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.presenter.WeatherDetailFrPresenter;
 import com.mlsdev.weather.ui.activity.DetailWeatherActivity;
 import com.mlsdev.weather.ui.fragment.IWeatherDetailFr;
-import com.mlsdev.weather.ui.util.ChartUtil;
+import com.mlsdev.weather.ui.utils.ChartUtil;
 
 import mlsdev.com.weather.R;
 

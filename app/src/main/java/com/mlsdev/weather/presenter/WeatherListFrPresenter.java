@@ -53,6 +53,7 @@ public class WeatherListFrPresenter implements BaseWeatherListener {
         weatherItems.removeAll(resultList);
         ServiceManager.getWeatherService().deleteWeatherList(weathers);
 
+        WeatherListFr.IS_ANY_CITY_ADDED = !weatherItems.isEmpty();
         weatherListFr.onDeleteWeather();
         weatherListFr.updateMenu();
         weatherListFr.hideDeletingCheckBox();
@@ -65,6 +66,7 @@ public class WeatherListFrPresenter implements BaseWeatherListener {
         for (Weather weather : weathers) {
             resultList.add(new WeatherItem(weather, false));
         }
+        WeatherListFr.IS_ANY_CITY_ADDED = !resultList.isEmpty();
         return resultList;
     }
 
@@ -98,7 +100,6 @@ public class WeatherListFrPresenter implements BaseWeatherListener {
     @Override
     public void onSuccessGetAllWeathers(WeatherList weatherList) {
         ServiceManager.getWeatherService().updateWeathers(weatherList.getList());
-
         weatherListFr.onSuccessUpdateAllWeather();
         weatherListFr.dismissProgressDialog();
     }
