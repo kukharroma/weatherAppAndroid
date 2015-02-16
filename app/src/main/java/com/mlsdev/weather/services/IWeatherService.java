@@ -38,4 +38,6 @@ public interface IWeatherService {
 
     public List<String> getCitiesId();
 
+    public List<String> getCitiesNames();
+
 }

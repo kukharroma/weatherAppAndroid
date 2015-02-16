@@ -61,6 +61,9 @@ public class Weather {
     @ForeignCollectionField(eager = true, maxEagerForeignCollectionLevel = 2)
     private ForeignCollection<DayWeather> dayTempList;
 
+    @SerializedName("cod")
+    private int code;
+
     public ForeignCollection<DayWeather> getDayTempList() {
         return dayTempList;
     }
@@ -147,5 +150,13 @@ public class Weather {
 
     public String getFormattedDate() {
         return dateFormat.format(new Date(Long.parseLong(this.weatherTime) * 1000));
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

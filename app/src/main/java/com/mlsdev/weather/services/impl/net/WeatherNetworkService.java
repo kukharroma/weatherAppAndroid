@@ -33,7 +33,13 @@ public class WeatherNetworkService implements IWeatherNetworkService {
     private Response.Listener<Weather> successGetWeather = new Response.Listener<Weather>() {
         @Override
         public void onResponse(Weather weather) {
-            listener.onSuccessGetWeatherByCity(weather);
+            if (weather.getCode() == 200) {
+                listener.onSuccessGetWeatherByCity(weather);
+            } else if (weather.getCode() == 404) {
+                listener.onErrorGetWeatherByCity("City not found");
+            } else {
+                listener.onErrorGetWeatherByCity("Server Error");
+            }
         }
     };
 
@@ -51,6 +57,12 @@ public class WeatherNetworkService implements IWeatherNetworkService {
         ServerRequest.getRequestQueue().add(request);
     }
 
+    @Override
+    public void getWeatherByCity(String cityName) {
+        String url = UrlBuilder.getWeatherUrlByCity(cityName);
+        ServerRequest<Weather> request = new ServerRequest<>(Request.Method.POST, url, Weather.class, successGetWeather, errorGetWeather);
+        ServerRequest.getRequestQueue().add(request);
+    }
 
     private Response.Listener<WeatherList> successGetAllWeather = new Response.Listener<WeatherList>() {
         @Override
@@ -78,14 +90,6 @@ public class WeatherNetworkService implements IWeatherNetworkService {
         String url = UrlBuilder.getWeatherUrlByCitiesId(citiesIdList);
         ServerRequest<WeatherList> request = new ServerRequest<>(Request.Method.POST, url, WeatherList.class, successGetAllWeather, errorGetAllWeather);
         ServerRequest.getRequestQueue().add(request);
-    }
-
-    @Override
-    public void getWeatherByCity(String cityName) {
-        String url = UrlBuilder.getWeatherUrlByCity(cityName);
-        ServerRequest<Weather> request = new ServerRequest<>(Request.Method.POST, url, Weather.class, successGetWeather, errorGetWeather);
-        ServerRequest.getRequestQueue().add(request);
-
     }
 
     private Response.Listener<DailyWeatherList> successGetDailyWeather = new Response.Listener<DailyWeatherList>() {

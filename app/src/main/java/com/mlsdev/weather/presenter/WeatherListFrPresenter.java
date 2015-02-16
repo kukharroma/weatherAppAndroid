@@ -1,5 +1,8 @@
 package com.mlsdev.weather.presenter;
 
+import android.widget.Toast;
+
+import com.mlsdev.weather.app.WeatherApp;
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.model.WeatherList;
 import com.mlsdev.weather.services.impl.ServiceManager;
@@ -8,6 +11,7 @@ import com.mlsdev.weather.services.impl.net.listeners.BaseWeatherListener;
 import com.mlsdev.weather.ui.fragment.IWeatherListFr;
 import com.mlsdev.weather.ui.fragment.impl.WeatherListFr;
 import com.mlsdev.weather.ui.model.WeatherItem;
+import com.mlsdev.weather.util.validator.WeatherListValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,9 +75,14 @@ public class WeatherListFrPresenter implements BaseWeatherListener {
     }
 
     public void loadWeather(String cityName) {
-        WeatherListFr context = (WeatherListFr) weatherListFr;
-        weatherListFr.showProgressDialog(context.getString(R.string.pb_load_weather_tittle), context.getString(R.string.pb_wait_message));
-        weatherNetworkService.getWeatherByCity(cityName);
+        String error = WeatherListValidator.getInstance().validate(cityName);
+        if (error == null) {
+            WeatherListFr context = (WeatherListFr) weatherListFr;
+            weatherListFr.showProgressDialog(context.getString(R.string.pb_load_weather_tittle), context.getString(R.string.pb_wait_message));
+            weatherNetworkService.getWeatherByCity(cityName);
+        } else {
+            Toast.makeText(WeatherApp.getInstance(), error, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

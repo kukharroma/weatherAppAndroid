@@ -12,6 +12,9 @@
 
     <string name="enter_city_name">Enter city name</string>
     <string name="add_new_city">Add new city</string>
+    <string name="city_exists">Such city is exists</string>
+    <string name="do_not_input_kiev">Do not input KIEV or KYIV !!!</string>
+
 
     <string name="update_all">Update all</string>
     <string name="action_settings">Settings</string>

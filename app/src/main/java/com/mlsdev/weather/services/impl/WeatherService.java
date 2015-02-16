@@ -90,4 +90,9 @@ public class WeatherService implements IWeatherService {
     public List<String> getCitiesId() {
         return weatherDao.getCitiesId();
     }
+
+    @Override
+    public List<String> getCitiesNames() {
+        return weatherDao.getCitiesNames();
+    }
 }

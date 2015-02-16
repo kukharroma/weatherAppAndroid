@@ -160,7 +160,6 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
 
-
     public void updateMenu() {
         getActivity().invalidateOptionsMenu();
     }

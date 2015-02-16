@@ -153,5 +153,20 @@ public class WeatherDao {
         return resultList;
     }
 
+    public List<String> getCitiesNames() {
+        List<String> resultList = new ArrayList<>();
+        try {
+            QueryBuilder<Weather, Integer> queryBuilder = weatherRuntimeDao.queryBuilder();
+            queryBuilder.selectColumns("city");
+            GenericRawResults<String[]> rawResults = weatherRuntimeDao.queryRaw(queryBuilder.prepareStatementString());
+            for (String[] IdItem : rawResults) {
+                resultList.add(IdItem[0]);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultList;
+    }
+
 
 }
