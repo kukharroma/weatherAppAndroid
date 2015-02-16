@@ -1,8 +1,5 @@
 package com.mlsdev.weather.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
@@ -18,7 +15,7 @@ import java.util.Date;
  */
 
 @DatabaseTable(tableName = "weather")
-public class Weather  {
+public class Weather {
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM hh:mm");
 
@@ -148,17 +145,7 @@ public class Weather  {
         this.clouds = clouds;
     }
 
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel(Parcel dest, int flags) {
-//
-//    }
-
     public String getFormattedDate() {
-        return dateFormat.format(new Date(Integer.parseInt(this.weatherTime)));
+        return dateFormat.format(new Date(Long.parseLong(this.weatherTime) * 1000));
     }
 }

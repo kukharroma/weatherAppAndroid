@@ -24,15 +24,15 @@ public class ChartUtil {
 
     private static ChartUtil instance = null;
 
+    private ChartUtil() {
+
+    }
+
     public static ChartUtil getInstance() {
         if (instance == null) {
             instance = new ChartUtil();
         }
         return instance;
-    }
-
-    private ChartUtil() {
-
     }
 
     public void drawWeatherChart(LineChart chart, Weather weather) {

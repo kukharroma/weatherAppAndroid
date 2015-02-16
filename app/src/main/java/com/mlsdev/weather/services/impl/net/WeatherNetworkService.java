@@ -85,6 +85,7 @@ public class WeatherNetworkService implements IWeatherNetworkService {
         String url = UrlBuilder.getWeatherUrlByCity(cityName);
         ServerRequest<Weather> request = new ServerRequest<>(Request.Method.POST, url, Weather.class, successGetWeather, errorGetWeather);
         ServerRequest.getRequestQueue().add(request);
+
     }
 
     private Response.Listener<DailyWeatherList> successGetDailyWeather = new Response.Listener<DailyWeatherList>() {
