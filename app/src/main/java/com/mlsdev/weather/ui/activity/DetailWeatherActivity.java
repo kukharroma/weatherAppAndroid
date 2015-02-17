@@ -32,6 +32,7 @@ public class DetailWeatherActivity extends BaseActivity {
     private List<Weather> weatherList;
     public static String CURRENT_ITEM = "CURRENT_ITEM";
     private PagerAdapter pagerAdapter;
+    private ViewPager viewPager;
     private ProgressDialog progressDialog;
 
     private static int CURRENT_POSITION = 0;
@@ -51,10 +52,10 @@ public class DetailWeatherActivity extends BaseActivity {
     }
 
     private void initComponents() {
-        ViewPager viewPager = (ViewPager) findViewById(R.id.detail_weather_pager);
+        viewPager = (ViewPager) findViewById(R.id.detail_weather_pager);
         pagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
-        viewPager.setCurrentItem(getIntent().getIntExtra(CURRENT_ITEM, 0));
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setCurrentItem(getIntent().getIntExtra(CURRENT_ITEM, 0));
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -95,7 +96,7 @@ public class DetailWeatherActivity extends BaseActivity {
         @Override
         public Fragment getItem(int position) {
             Weather weather = weatherList.get(position);
-//            CURRENT_POSITION = position - 1;
+            CURRENT_POSITION = viewPager.getCurrentItem();
             return new WeatherDetailFr(weather, getActivity());
         }
 
@@ -111,8 +112,7 @@ public class DetailWeatherActivity extends BaseActivity {
     }
 
     public void updateViewPager(Weather weather) {
-        weatherList.remove(CURRENT_POSITION);
-        weatherList.add(weather);
+        initList();
         pagerAdapter.notifyDataSetChanged();
     }
 
