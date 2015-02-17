@@ -21,21 +21,8 @@
         <item name="android:textColor">@color/light_blue</item>
     </style>
 
-    <style name="progressDialogStyle" parent="android:">
-        <!--<item name="android:alertDialogStyle">@style/CustomAlertDialogStyle</item>-->
-        <!--<item name="android:textColorPrimary">@color/light_blue</item>-->
+    <style name="progressDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@color/light_blue</item>
     </style>
 
-    <style name="CustomAlertDialogStyle">
-        <!--<item name="android:bottomBright">@color/light_blue</item>-->
-        <!--<item name="android:bottomDark">@color/light_blue</item>-->
-        <!--<item name="android:bottomMedium">@color/light_blue</item>-->
-        <!--<item name="android:centerBright">@color/light_blue</item>-->
-        <!--<item name="android:centerDark">@color/light_blue</item>-->
-        <!--<item name="android:centerMedium">@color/light_blue</item>-->
-        <!--<item name="android:fullBright">@color/light_blue</item>-->
-        <!--<item name="android:fullDark">@color/light_blue</item>-->
-        <!--<item name="android:topBright">@color/light_blue</item>-->
-        <!--<item name="android:topDark">@color/light_blue</item>-->
-    </style>
 </resources>

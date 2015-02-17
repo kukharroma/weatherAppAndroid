@@ -30,6 +30,5 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.mcxiaoke.volley:library:1.0.+'
 
-
     compile files('libs/mpandroidchartlibrary-1-7-4.jar')
 }

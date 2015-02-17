@@ -2,6 +2,8 @@ package com.mlsdev.weather.ui.fragment.impl;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,7 +88,8 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
 
     @Override
     public void showProgressDialog(String tittle, String message) {
-        progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(getActivity(), R.style.progressDialogStyle);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressDialog.setCancelable(false);
         progressDialog.setTitle(tittle);
         progressDialog.setMessage(message);
