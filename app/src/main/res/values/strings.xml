@@ -33,4 +33,7 @@
 
     <string name="percent">%</string>
     <string name="m_per_sec">m/s</string>
+    <string name="updated">"Updated at "</string>
+    <string name="temp_for_next">Temp for next </string>
+    <string name="days">" days"</string>
 </resources>

@@ -44,13 +44,13 @@ public class ChartUtil {
             arrayList.add(new Entry((float) day.getDetailDayWeatherTemp().getDay(), arrayList.size()));
         }
 
-        LineDataSet set = new LineDataSet(arrayList, "set1");
+        LineDataSet set = new LineDataSet(arrayList, WeatherApp.getInstance().getString(R.string.temp_for_next) + " " + strings.size() + WeatherApp.getInstance().getString(R.string.days));
         set.setLineWidth(3f);
         set.setCircleSize(5f);
         set.setCircleColor(WeatherApp.getInstance().getResources().getColor(R.color.red));
 
         LineData data = new LineData(strings, set);
-        chart.setDescription("Updated");
+        chart.setDescription(WeatherApp.getInstance().getString(R.string.updated) + weather.getFormattedHourDate());
         chart.setData(data);
         chart.setStartAtZero(false);
 
@@ -70,8 +70,8 @@ public class ChartUtil {
         yl.setPosition(YLabels.YLabelPosition.LEFT); // set the position
         yl.setTextSize(20f); // set the textsize
 
-        chart.setValueTextSize(12f);
 
+        chart.setValueTextSize(12f);
         chart.setDrawYLabels(false);
     }
 }

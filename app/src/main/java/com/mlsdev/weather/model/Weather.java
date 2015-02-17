@@ -18,6 +18,7 @@ import java.util.Date;
 public class Weather {
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM hh:mm");
+    private SimpleDateFormat dateHourFormat = new SimpleDateFormat("hh:mm");
 
     public Weather() {
     }
@@ -150,6 +151,10 @@ public class Weather {
 
     public String getFormattedDate() {
         return dateFormat.format(new Date(Long.parseLong(this.weatherTime)));
+    }
+
+    public String getFormattedHourDate(){
+        return dateHourFormat.format(new Date(Long.parseLong(this.weatherTime)));
     }
 
     public int getCode() {
