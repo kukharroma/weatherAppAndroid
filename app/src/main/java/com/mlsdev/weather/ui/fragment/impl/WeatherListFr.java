@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -105,7 +104,7 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
                 presenter.deleteCheckedItems(weatherItemList);
                 break;
             case R.id.main_action_settings:
-                Toast.makeText(getActivity(), "Settings", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Settings", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_update_all:
                 presenter.loadAllWeathers();

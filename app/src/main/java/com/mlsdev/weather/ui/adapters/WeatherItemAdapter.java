@@ -1,6 +1,7 @@
 package com.mlsdev.weather.ui.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.mlsdev.weather.ui.fragment.impl.WeatherListFr;
 import com.mlsdev.weather.ui.model.WeatherItem;
+import com.mlsdev.weather.util.WeatherImageUtil;
 
 import java.util.List;
 
@@ -82,7 +84,8 @@ public class WeatherItemAdapter extends BaseAdapter {
         }
 
         final WeatherItem item = weatherItemList.get(position);
-        ivWeather.setImageResource(R.drawable.weather_image);
+        Drawable drawable = WeatherImageUtil.getImageByName(item.getWeather().getFirstWeather().getIcon());
+        ivWeather.setImageDrawable(drawable);
         tvLocation.setText(item.getWeather().getCity() + ", " + item.getWeather().getSys().getCountry());
         tvMainTemp.setText(String.valueOf(item.getWeather().getTemperature().getTemp()) + context.getString(R.string.degree));
         tvWeatherTime.setText(item.getWeather().getFormattedDate());
