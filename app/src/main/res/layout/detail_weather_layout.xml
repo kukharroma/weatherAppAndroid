@@ -31,33 +31,32 @@
             android:textSize="50dp" />
 
         <TextView
-            android:id="@+id/tv_detail_main_weather"
+            android:id="@+id/tv_detail_humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_detail_main_temp"
             android:layout_centerHorizontal="true"
-            android:text="Clouds"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/tv_detail_weather_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_detail_main_weather"
-            android:layout_centerHorizontal="true"
-            android:text="broken clouds"
+            android:text="humidity - 72%"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/tv_detail_min_max_temp"
+            android:id="@+id/tv_detail_wind_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_detail_weather_description"
+            android:layout_below="@+id/tv_detail_humidity"
+            android:layout_centerHorizontal="true"
+            android:text="wind speed - 3 m/s"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_detail_cloudiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_detail_wind_speed"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
-
-            android:text="8.2°C / -2.2°C"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="cloudiness - 50%"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
     <com.github.mikephil.charting.charts.LineChart

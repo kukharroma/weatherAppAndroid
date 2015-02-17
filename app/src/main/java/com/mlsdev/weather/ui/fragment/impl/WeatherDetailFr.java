@@ -28,7 +28,7 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
     private Weather weather;
 
     private LineChart chart;
-    private TextView tvLocation, tvMainTemp, tvMainWeather, tvMainWeatherDescription, tvMinMaxTemp;
+    private TextView tvLocation, tvMainTemp, tvHumidity, tvWindDescription, tvCloudiness;
     private ProgressBar progressBar;
     private ProgressDialog progressDialog;
 
@@ -58,9 +58,9 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
     public void initComponents(View view) {
         tvLocation = (TextView) view.findViewById(R.id.tv_detail_location);
         tvMainTemp = (TextView) view.findViewById(R.id.tv_detail_main_temp);
-        tvMainWeather = (TextView) view.findViewById(R.id.tv_detail_main_weather);
-        tvMainWeatherDescription = (TextView) view.findViewById(R.id.tv_detail_weather_description);
-        tvMinMaxTemp = (TextView) view.findViewById(R.id.tv_detail_min_max_temp);
+        tvHumidity = (TextView) view.findViewById(R.id.tv_detail_humidity);
+        tvWindDescription = (TextView) view.findViewById(R.id.tv_detail_wind_speed);
+        tvCloudiness = (TextView) view.findViewById(R.id.tv_detail_cloudiness);
         chart = (LineChart) view.findViewById(R.id.chart);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
     }
@@ -69,9 +69,9 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
     public void fillComponents() {
         tvLocation.setText(weather.getCity() + " ," + weather.getSys().getCountry());
         tvMainTemp.setText(String.valueOf(weather.getTemperature().getTemp()) + getString(R.string.degree));
-        tvMainWeather.setText(weather.getFirstWeather().getMain());
-        tvMainWeatherDescription.setText(weather.getFirstWeather().getDescription());
-        tvMinMaxTemp.setText(weather.getTemperature().getMinTemp() + getString(R.string.degree) + " / " + weather.getTemperature().getMaxTemp() + getString(R.string.degree));
+        tvHumidity.setText(getString(R.string.humidity) + " " + weather.getTemperature().getHumidity() + " " + getString(R.string.percent));
+        tvWindDescription.setText(getString(R.string.wind_speed) + " " + weather.getWind().getSpeed() + " " + getString(R.string.m_per_sec));
+        tvCloudiness.setText(getString(R.string.cloudiness) + " " + weather.getClouds().getCloudiness() + " " + getString(R.string.percent));
 
         if (weather.getDayTempList().isEmpty()) {
             presenter.firstLoadDailyWeather(weather);
