@@ -3,73 +3,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_detail_location"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="London, GB"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:background="@color/light_blue">
 
-    <TextView
-        android:id="@+id/tv_detail_main_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_detail_location"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="@string/degree"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="50dp" />
+        <TextView
+            android:id="@+id/tv_detail_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="London, GB"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/tv_detail_main_weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_detail_main_temp"
-        android:layout_centerHorizontal="true"
-        android:text="Clouds"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/tv_detail_main_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_detail_location"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/degree"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="50dp" />
 
-    <TextView
-        android:id="@+id/tv_detail_weather_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_detail_main_weather"
-        android:layout_centerHorizontal="true"
-        android:text="broken clouds"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/tv_detail_main_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_detail_main_temp"
+            android:layout_centerHorizontal="true"
+            android:text="Clouds"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/tv_detail_min_max_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_detail_weather_description"
-        android:layout_centerHorizontal="true"
-        android:text="8.2°C / -2.2°C"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/tv_detail_weather_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_detail_main_weather"
+            android:layout_centerHorizontal="true"
+            android:text="broken clouds"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_detail_min_max_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_detail_weather_description"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+
+            android:text="8.2°C / -2.2°C"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </RelativeLayout>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv_detail_min_max_temp"
+        android:layout_below="@+id/relativeLayout"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="30dp" />
 
     <ProgressBar
-
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/chart"
-        android:layout_below="@id/tv_detail_min_max_temp"
+        android:layout_below="@id/relativeLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
+        android:layout_centerVertical="true"
+        android:layout_marginTop="140dp" />
 
 </RelativeLayout>

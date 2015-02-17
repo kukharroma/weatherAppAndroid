@@ -166,7 +166,7 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
 
     @Override
     public void showProgressDialog(String tittle, String message) {
-        progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(getActivity(), R.style.progressDialogStyle);
         progressDialog.setCancelable(false);
         progressDialog.setTitle(tittle);
         progressDialog.setMessage(message);

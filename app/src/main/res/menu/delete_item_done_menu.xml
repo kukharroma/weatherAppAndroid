@@ -10,6 +10,7 @@
         android:id="@+id/main_action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
+
         app:showAsAction="never" />
 
     <item

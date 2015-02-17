@@ -1,34 +1,41 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"></style>
 
 
     <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
-
-        <!--We will be using the toolbar so no need to show ActionBar-->
         <item name="android:windowActionBar">false</item>
-        <!--Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
-        <!-- colorPrimary is used for the default weatherByCity bar background -->
-        <item name="colorPrimary">#2196F3</item>
-        <!--colorPrimaryDark is used for the status bar -->
-        <item name="colorPrimaryDark">#1976D2</item>
-        <!--<!- colorAccent is used as the default value for colorControlActivated-->
-        <!--which is used to tint widgets -->-->
+        <item name="android:textColor">@color/white</item>
+        <item name="colorPrimary">#ff43b6f3</item>
+        <item name="colorPrimaryDark">#ff43b6f3</item>
         <item name="colorAccent">#FF4081</item>
-        <!-- You can also set colorControlNormal, colorControlActivated
-             colorControlHighlight and colorSwitchThumbNormal. -->
-
+        <item name="android:itemTextAppearance">@style/menuItemStyle</item>
     </style>
 
     <style name="OverflowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
-        <!-- Required for pre-Lollipop. -->
         <item name="overlapAnchor">false</item>
-
     </style>
 
+    <style name="menuItemStyle" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/light_blue</item>
+    </style>
 
+    <style name="progressDialogStyle" parent="android:">
+        <!--<item name="android:alertDialogStyle">@style/CustomAlertDialogStyle</item>-->
+        <!--<item name="android:textColorPrimary">@color/light_blue</item>-->
+    </style>
+
+    <style name="CustomAlertDialogStyle">
+        <!--<item name="android:bottomBright">@color/light_blue</item>-->
+        <!--<item name="android:bottomDark">@color/light_blue</item>-->
+        <!--<item name="android:bottomMedium">@color/light_blue</item>-->
+        <!--<item name="android:centerBright">@color/light_blue</item>-->
+        <!--<item name="android:centerDark">@color/light_blue</item>-->
+        <!--<item name="android:centerMedium">@color/light_blue</item>-->
+        <!--<item name="android:fullBright">@color/light_blue</item>-->
+        <!--<item name="android:fullDark">@color/light_blue</item>-->
+        <!--<item name="android:topBright">@color/light_blue</item>-->
+        <!--<item name="android:topDark">@color/light_blue</item>-->
+    </style>
 </resources>
