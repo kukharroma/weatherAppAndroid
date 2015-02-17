@@ -35,8 +35,6 @@ public class DetailWeatherActivity extends BaseActivity {
     private ViewPager viewPager;
     private ProgressDialog progressDialog;
 
-    private static int CURRENT_POSITION = 0;
-
     private WeatherDetailFrPresenter presenter = new WeatherDetailFrPresenter(this);
 
     @Override
@@ -81,7 +79,7 @@ public class DetailWeatherActivity extends BaseActivity {
                 Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.update_item_action:
-                presenter.updateDailyWeather(weatherList.get(CURRENT_POSITION));
+                presenter.updateDailyWeather(weatherList.get(viewPager.getCurrentItem()));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -96,7 +94,6 @@ public class DetailWeatherActivity extends BaseActivity {
         @Override
         public Fragment getItem(int position) {
             Weather weather = weatherList.get(position);
-            CURRENT_POSITION = viewPager.getCurrentItem();
             return new WeatherDetailFr(weather, getActivity());
         }
 
