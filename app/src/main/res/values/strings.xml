@@ -43,6 +43,20 @@
         <item>7</item>
         <item>10</item>
     </integer-array>
+    
+    <string-array name="entries">
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+    </string-array>
 
     <string name="settings">Settings</string>
+
+
+    <!--settings keys-->
+
+    <string name="numberOdDaysKey">NUMBER_OF_DAYS_KEY</string>
+
+
+
 </resources>

@@ -104,6 +104,7 @@ public class WeatherListFr extends Fragment implements IWeatherListFr {
                 presenter.deleteCheckedItems(weatherItemList);
                 break;
             case R.id.main_action_settings:
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
 //                Toast.makeText(getActivity(), "Settings", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_update_all:

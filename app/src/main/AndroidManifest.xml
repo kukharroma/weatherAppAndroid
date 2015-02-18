@@ -19,7 +19,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mlsdev.weather.ui.activity.MainActivity" />
         </activity>
-
+        <activity android:name="com.mlsdev.weather.ui.fragment.impl.SettingsActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
