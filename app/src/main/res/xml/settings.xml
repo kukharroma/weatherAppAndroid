@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/settings">
-        <ListPreference
-            android:key="@string/numberOdDaysKey"
-            android:title="asdas"
-            android:summary="asds"
-            android:entries="@array/entries"
-            android:entryValues="@array/dailyList" />
-    </PreferenceCategory>
+
+    <ListPreference
+        android:entries="@array/entries"
+        android:entryValues="@array/entry_values"
+        android:key="@string/amountOfDaysKey"
+        android:defaultValue="@string/defaultAmountOfDays"
+        android:summary=""
+        android:title="@string/tittle_amount_of_days" />
+
 </PreferenceScreen>

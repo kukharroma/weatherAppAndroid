@@ -32,31 +32,32 @@
 
     <string name="percent">%</string>
     <string name="m_per_sec">m/s</string>
-    <string name="updated">"Updated at "</string>
+    <string name="updated">Updated at </string>
     <string name="temp_for_next">Temp for next </string>
-    <string name="days">" days"</string>
+    <string name="days"> days</string>
     <string name="server_error">Sorry, server error ;(</string>
     <string name="check_internet_connection">Check Internet Connection </string>
 
-    <integer-array name="dailyList">
-        <item>3</item>
-        <item>7</item>
-        <item>10</item>
-    </integer-array>
-    
-    <string-array name="entries">
-        <item>one</item>
-        <item>two</item>
-        <item>three</item>
-    </string-array>
 
     <string name="settings">Settings</string>
 
 
     <!--settings keys-->
 
-    <string name="numberOdDaysKey">NUMBER_OF_DAYS_KEY</string>
+    <string name="amountOfDaysKey">NUMBER_OF_DAYS_KEY</string>
+    <string name="defaultAmountOfDays">3</string>
+    <string name="tittle_amount_of_days">Amount of days  for daily forecast</string>
 
+    <string-array name="entries">
+        <item>3 days</item>
+        <item>5 days</item>
+        <item>7 days</item>
+    </string-array>
 
+    <string-array name="entry_values">
+        <item>3</item>
+        <item>5</item>
+        <item>7</item>
+    </string-array>
 
 </resources>

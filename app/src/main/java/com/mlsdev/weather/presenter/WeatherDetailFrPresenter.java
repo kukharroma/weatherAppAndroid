@@ -9,6 +9,7 @@ import com.mlsdev.weather.services.impl.net.WeatherNetworkService;
 import com.mlsdev.weather.services.impl.net.listeners.WeatherDailyListener;
 import com.mlsdev.weather.ui.activity.DetailWeatherActivity;
 import com.mlsdev.weather.ui.fragment.impl.WeatherDetailFr;
+import com.mlsdev.weather.util.PrefManager;
 
 import mlsdev.com.weather.R;
 
@@ -35,7 +36,8 @@ public class WeatherDetailFrPresenter implements WeatherDailyListener {
     public void updateDailyWeather(Weather weather) {
         this.weather = weather;
         activity.showProgressDialog(activity.getString(R.string.pb_load_weather_tittle), activity.getString(R.string.pb_wait_message));
-        weatherNetworkService.getDailyWeather(String.valueOf(weather.getId()), 7, false);
+        String amountOfDays = PrefManager.getAmountOfDaysDailyForecast();
+        weatherNetworkService.getDailyWeather(String.valueOf(weather.getId()), Integer.parseInt(amountOfDays), false);
     }
 
     @Override
@@ -55,7 +57,8 @@ public class WeatherDetailFrPresenter implements WeatherDailyListener {
         this.weather = weather;
         weatherDetailFr.dismissChart();
         weatherDetailFr.showProgressBar();
-        weatherNetworkService.getDailyWeather(String.valueOf(weather.getId()), 7, true);
+        String amountOfDays = PrefManager.getAmountOfDaysDailyForecast();
+        weatherNetworkService.getDailyWeather(String.valueOf(weather.getId()), Integer.parseInt(amountOfDays), true);
     }
 
     @Override
