@@ -1,8 +1,12 @@
 package com.mlsdev.weather.services.impl.net;
 
+import android.content.Context;
+
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.mlsdev.weather.app.WeatherApp;
 import com.mlsdev.weather.model.DailyWeatherList;
 import com.mlsdev.weather.model.Weather;
 import com.mlsdev.weather.model.WeatherList;
@@ -12,8 +16,9 @@ import com.mlsdev.weather.services.impl.net.listeners.WeatherDailyListener;
 import com.mlsdev.weather.services.net.IWeatherNetworkService;
 import com.mlsdev.weather.util.UrlBuilder;
 
-import java.util.Date;
 import java.util.List;
+
+import mlsdev.com.weather.R;
 
 /**
  * Created by romakukhar on 31.01.15.
@@ -22,6 +27,7 @@ public class WeatherNetworkService implements IWeatherNetworkService {
 
     private BaseWeatherListener listener;
     private WeatherDailyListener dailyListener;
+    private Context context = WeatherApp.getInstance();
 
     public WeatherNetworkService(BaseWeatherListener listener) {
         this.listener = listener;
@@ -34,6 +40,9 @@ public class WeatherNetworkService implements IWeatherNetworkService {
     private Response.Listener<Weather> successGetWeather = new Response.Listener<Weather>() {
         @Override
         public void onResponse(Weather weather) {
+            /**
+             *  fucking api !!! ;(
+             */
             if (weather.getCode() == 200) {
                 listener.onSuccessGetWeatherByCity(weather);
             } else if (weather.getCode() == 404) {
@@ -47,7 +56,11 @@ public class WeatherNetworkService implements IWeatherNetworkService {
     private Response.ErrorListener errorGetWeather = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            listener.onErrorGetWeatherByCity("error");
+            if (error instanceof NoConnectionError) {
+                listener.onErrorGetWeatherByCity(WeatherApp.getInstance().getString(R.string.check_internet_connection));
+                return;
+            }
+            listener.onErrorGetWeatherByCity(context.getString(R.string.server_error));
         }
     };
 
@@ -75,7 +88,11 @@ public class WeatherNetworkService implements IWeatherNetworkService {
     private Response.ErrorListener errorGetAllWeather = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            listener.onErrorGetAllWeathers("error");
+            if (error instanceof NoConnectionError) {
+                listener.onErrorGetAllWeathers(context.getString(R.string.check_internet_connection));
+                return;
+            }
+            listener.onErrorGetAllWeathers(context.getString(R.string.server_error));
         }
     };
 
@@ -93,17 +110,21 @@ public class WeatherNetworkService implements IWeatherNetworkService {
         ServerRequest.getRequestQueue().add(request);
     }
 
-    private Response.Listener<DailyWeatherList> successGetDailyWeather = new Response.Listener<DailyWeatherList>() {
+    private Response.Listener<DailyWeatherList> successUpdateDailyWeather = new Response.Listener<DailyWeatherList>() {
         @Override
         public void onResponse(DailyWeatherList dailyList) {
-            dailyListener.onSuccessGetDailyWeather(dailyList);
+            dailyListener.onSuccessUpdateDailyWeather(dailyList);
         }
     };
 
-    private Response.ErrorListener errorGetDailyWeather = new Response.ErrorListener() {
+    private Response.ErrorListener errorUpdateDailyWeather = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            dailyListener.onErrorGetDailyWeather("error");
+            if (error instanceof NoConnectionError) {
+                dailyListener.onErrorUpdateDailyWeather(context.getString(R.string.check_internet_connection));
+                return;
+            }
+            dailyListener.onErrorUpdateDailyWeather(context.getString(R.string.server_error));
         }
     };
 
@@ -113,7 +134,7 @@ public class WeatherNetworkService implements IWeatherNetworkService {
         if (isFirstLoad) {
             request = new ServerRequest<>(Request.Method.POST, url, DailyWeatherList.class, successFirstLoadDailyWeather, errorFirstLoadDailyWeather);
         } else {
-            request = new ServerRequest<>(Request.Method.POST, url, DailyWeatherList.class, successGetDailyWeather, errorGetDailyWeather);
+            request = new ServerRequest<>(Request.Method.POST, url, DailyWeatherList.class, successUpdateDailyWeather, errorUpdateDailyWeather);
         }
         ServerRequest.getRequestQueue().add(request);
     }
@@ -128,8 +149,11 @@ public class WeatherNetworkService implements IWeatherNetworkService {
     private Response.ErrorListener errorFirstLoadDailyWeather = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            dailyListener.onErrorFirstLoadDailyWeather("error");
+            if (error instanceof NoConnectionError) {
+                dailyListener.onErrorFirstLoadDailyWeather(context.getString(R.string.check_internet_connection));
+                return;
+            }
+            dailyListener.onErrorFirstLoadDailyWeather(context.getString(R.string.server_error));
         }
     };
-
 }

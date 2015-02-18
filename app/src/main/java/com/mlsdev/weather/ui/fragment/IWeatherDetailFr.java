@@ -7,7 +7,7 @@ import com.mlsdev.weather.model.Weather;
  */
 public interface IWeatherDetailFr extends BaseFragment {
 
-    public void updateDetailWeather(Weather weather);
+    public void updateDetailWeather();
 
     public void showProgressBar();
 

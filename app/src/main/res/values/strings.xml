@@ -13,7 +13,7 @@
     <string name="enter_city_name">Enter city name</string>
     <string name="add_new_city">Add new city</string>
     <string name="city_exists">Such city is exists</string>
-    <string name="do_not_input_kiev">Do not input KIEV or KYIV !!!</string>
+    <string name="do_not_input_kiev">Please, don\'t input Kiev or Kyiv</string>
 
 
     <string name="update_all">Update all</string>
@@ -21,7 +21,6 @@
     <string name="add_item">Add</string>
     <string name="delete_item">Delete</string>
     <string name="refresh_item">Refresh</string>
-
 
     <string name="pb_load_weather_tittle">Loading weather</string>
     <string name="pb_wait_message">Wait...</string>
@@ -36,4 +35,14 @@
     <string name="updated">"Updated at "</string>
     <string name="temp_for_next">Temp for next </string>
     <string name="days">" days"</string>
+    <string name="server_error">Sorry, server error ;(</string>
+    <string name="check_internet_connection">Check Internet Connection </string>
+
+    <integer-array name="dailyList">
+        <item>3</item>
+        <item>7</item>
+        <item>10</item>
+    </integer-array>
+
+    <string name="settings">Settings</string>
 </resources>

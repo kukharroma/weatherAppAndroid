@@ -39,15 +39,16 @@ public class WeatherDetailFrPresenter implements WeatherDailyListener {
     }
 
     @Override
-    public void onSuccessGetDailyWeather(DailyWeatherList dailyList) {
+    public void onSuccessUpdateDailyWeather(DailyWeatherList dailyList) {
         ServiceManager.getWeatherService().createOrUpdateDailyWeather(weather, dailyList.getList());
-        activity.updateViewPager(weather);
+        activity.updateViewPager();
         activity.dismissProgressDialog();
     }
 
     @Override
-    public void onErrorGetDailyWeather(String error) {
+    public void onErrorUpdateDailyWeather(String error) {
         activity.dismissProgressDialog();
+        activity.showErrorUpdateDailyWeather(error);
     }
 
     public void firstLoadDailyWeather(Weather weather) {
@@ -60,11 +61,11 @@ public class WeatherDetailFrPresenter implements WeatherDailyListener {
     @Override
     public void onSuccessFirstLoadDailyWeather(DailyWeatherList dailyList) {
         ServiceManager.getWeatherService().createDailyWeather(weather, dailyList.getList());
-        weatherDetailFr.updateDetailWeather(weather);
+        weatherDetailFr.updateDetailWeather();
     }
 
     @Override
     public void onErrorFirstLoadDailyWeather(String error) {
-        Toast.makeText(activity, error, Toast.LENGTH_LONG).show();
+        Toast.makeText(weatherDetailFr.getActivity(), error, Toast.LENGTH_LONG).show();
     }
 }

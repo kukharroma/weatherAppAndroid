@@ -82,8 +82,8 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
     }
 
     @Override
-    public void updateDetailWeather(Weather weather) {
-        activity.updateViewPager(weather);
+    public void updateDetailWeather() {
+        activity.updateViewPager();
     }
 
     @Override

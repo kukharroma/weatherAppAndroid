@@ -7,9 +7,9 @@ import com.mlsdev.weather.model.DailyWeatherList;
  */
 public interface WeatherDailyListener {
 
-    public void onSuccessGetDailyWeather(DailyWeatherList dailyList);
+    public void onSuccessUpdateDailyWeather(DailyWeatherList dailyList);
 
-    public void onErrorGetDailyWeather(String error);
+    public void onErrorUpdateDailyWeather(String error);
 
     public void onSuccessFirstLoadDailyWeather(DailyWeatherList dailyList);
 

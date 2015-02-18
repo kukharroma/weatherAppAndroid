@@ -6,7 +6,7 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -85,7 +85,7 @@ public class DetailWeatherActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
@@ -108,7 +108,7 @@ public class DetailWeatherActivity extends BaseActivity {
         }
     }
 
-    public void updateViewPager(Weather weather) {
+    public void updateViewPager() {
         initList();
         pagerAdapter.notifyDataSetChanged();
     }
@@ -124,6 +124,10 @@ public class DetailWeatherActivity extends BaseActivity {
 
     public void dismissProgressDialog() {
         progressDialog.dismiss();
+    }
+
+    public void showErrorUpdateDailyWeather(String error){
+        Toast.makeText(this, error, Toast.LENGTH_LONG).show();
     }
 
     public DetailWeatherActivity getActivity() {
