@@ -23,4 +23,9 @@
         <item name="android:textColor">@color/light_blue</item>
     </style>
 
+    <style name="PrefFragTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/light_blue</item>
+    </style>
+
+
 </resources>

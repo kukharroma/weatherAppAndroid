@@ -7,7 +7,7 @@
         android:entryValues="@array/entry_values"
         android:key="@string/amountOfDaysKey"
         android:defaultValue="@string/defaultAmountOfDays"
-        android:summary=""
+        android:summary="3"
         android:title="@string/tittle_amount_of_days" />
 
 </PreferenceScreen>

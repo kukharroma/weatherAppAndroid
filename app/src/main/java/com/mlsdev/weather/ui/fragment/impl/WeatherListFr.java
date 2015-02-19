@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.mlsdev.weather.presenter.WeatherListFrPresenter;
 import com.mlsdev.weather.ui.activity.DetailWeatherActivity;
+import com.mlsdev.weather.ui.activity.SettingsActivity;
 import com.mlsdev.weather.ui.adapters.WeatherItemAdapter;
 import com.mlsdev.weather.ui.dialogs.AddWeatherItemDialog;
 import com.mlsdev.weather.ui.fragment.IWeatherListFr;
