@@ -3,6 +3,7 @@ package com.mlsdev.weather.ui.activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -76,7 +77,7 @@ public class DetailWeatherActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.detail_action_settings:
-                Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
                 break;
             case R.id.update_item_action:
                 presenter.updateDailyWeather(weatherList.get(viewPager.getCurrentItem()));
