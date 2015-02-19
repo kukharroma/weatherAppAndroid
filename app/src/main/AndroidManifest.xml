@@ -8,19 +8,25 @@
         android:label="@string/app_name"
         android:theme="@style/MyTheme">
 
-        <activity android:name="com.mlsdev.weather.ui.activity.MainActivity">
+        <activity
+            android:name="com.mlsdev.weather.ui.activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.mlsdev.weather.ui.activity.DetailWeatherActivity">
+        <activity
+            android:name="com.mlsdev.weather.ui.activity.DetailWeatherActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mlsdev.weather.ui.activity.MainActivity" />
         </activity>
-        <activity android:name="com.mlsdev.weather.ui.activity.SettingsActivity"
-            android:theme="@style/PrefFragTheme"/>
+        <activity
+            android:name="com.mlsdev.weather.ui.activity.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/PrefFragTheme" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
