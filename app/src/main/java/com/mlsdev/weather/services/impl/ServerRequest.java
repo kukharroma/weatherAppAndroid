@@ -1,6 +1,7 @@
 package com.mlsdev.weather.services.impl;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -21,6 +22,7 @@ import java.util.Map;
  */
 public class ServerRequest<T> extends Request<T> {
 
+    private final String TAG = this.getClass().getSimpleName();
     private Gson gson = new Gson();
 
     private Class<T> clazz;
@@ -40,6 +42,7 @@ public class ServerRequest<T> extends Request<T> {
 
     public ServerRequest(int method, String url, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
         super(method, url, errorListener);
+        Log.e(TAG, url);
         setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         this.clazz = clazz;
         this.listener = listener;

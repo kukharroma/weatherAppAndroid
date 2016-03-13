@@ -10,34 +10,34 @@ import java.util.List;
  */
 public interface IWeatherService {
 
-    public void createWeather(Weather weather);
+    void createWeather(Weather weather);
 
-    public void createOrUpdateWeather(Weather weather);
+    void createOrUpdateWeather(Weather weather);
 
-    public void deleteWeather(Weather weather);
+    void deleteWeather(Weather weather);
 
-    public void createOrUpdateDailyWeather(Weather weather, List<DayWeather> list);
+    void createOrUpdateDailyWeather(Weather weather, List<DayWeather> list);
 
-    public void createDailyWeather(Weather weather, List<DayWeather> list);
+    void createDailyWeather(Weather weather, List<DayWeather> list);
 
-    public void updateDailyWeather(Weather weather, List<DayWeather> list);
+    void updateDailyWeather(Weather weather, List<DayWeather> list);
 
-    public void deleteDailyWeather(Weather weather);
+    void deleteDailyWeather(Weather weather);
 
-    public void deleteAllWeather();
+    void deleteAllWeather();
 
-    public void deleteWeatherList(List<Weather> weathers);
+    void deleteWeatherList(List<Weather> weathers);
 
-    public void updateWeathers(List<Weather> weathers);
+    void updateWeathers(List<Weather> weathers);
 
-    public List<Weather> getAllWeathers();
+    List<Weather> getAllWeathers();
 
-    public Weather getWeatherByCityName(String cityName);
+    Weather getWeatherByCityName(String cityName);
 
-    public Weather getWeatherById(int id);
+    Weather getWeatherById(int id);
 
-    public List<String> getCitiesId();
+    List<String> getCitiesId();
 
-    public List<String> getCitiesNames();
+    List<String> getCitiesNames();
 
 }

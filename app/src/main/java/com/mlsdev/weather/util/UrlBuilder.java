@@ -2,6 +2,8 @@ package com.mlsdev.weather.util;
 
 import android.net.Uri;
 
+import com.mlsdev.weather.app.WeatherApp;
+
 import java.util.List;
 
 /**
@@ -18,10 +20,12 @@ public class UrlBuilder {
     private static final String DAILY = "daily";
     private static final String FORECAST = "forecast";
     private static final String COUNT = "cnt";
+    private static final String APP_ID = "appid";
 
     public static String getWeatherUrlByCity(String cityName) {
         Uri uriBuilder = Uri.parse(WeatherApi.MAIN_URL + WEATHER).buildUpon()
                 .appendQueryParameter(QUERY_Q, cityName)
+                .appendQueryParameter(APP_ID, WeatherApp.APP_ID)
                 .appendQueryParameter(QUERY_UNITS, UNITS)
                 .build();
         return uriBuilder.toString();
@@ -30,6 +34,7 @@ public class UrlBuilder {
     public static String getWeatherUrlById(int id) {
         Uri uriBuilder = Uri.parse(WeatherApi.MAIN_URL + WEATHER).buildUpon()
                 .appendQueryParameter(QUERY_ID, String.valueOf(id))
+                .appendQueryParameter(APP_ID, WeatherApp.APP_ID)
                 .appendQueryParameter(QUERY_UNITS, UNITS)
                 .build();
         return uriBuilder.toString();
@@ -38,6 +43,7 @@ public class UrlBuilder {
     public static String getWeatherUrlByCitiesId(List<String> citiesId) {
         Uri uriBuilder = Uri.parse(WeatherApi.MAIN_URL + GROUP).buildUpon()
                 .appendQueryParameter(QUERY_ID, getStringWithAllId(citiesId))
+                .appendQueryParameter(APP_ID, WeatherApp.APP_ID)
                 .appendQueryParameter(QUERY_UNITS, UNITS)
                 .build();
         return uriBuilder.toString();
@@ -47,6 +53,7 @@ public class UrlBuilder {
         Uri uriBuilder = Uri.parse(WeatherApi.MAIN_URL + FORECAST + "/" + DAILY).buildUpon()
                 .appendQueryParameter(QUERY_ID, cityId)
                 .appendQueryParameter(COUNT, String.valueOf(dayCount))
+                .appendQueryParameter(APP_ID, WeatherApp.APP_ID)
                 .appendQueryParameter(QUERY_UNITS, UNITS)
                 .build();
         return uriBuilder.toString();

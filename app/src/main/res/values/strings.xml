@@ -1,4 +1,7 @@
 <resources>
+    <!-- appid key-->
+    <string name="app_id">eb0a177eb8145777d696b3df1b450a19</string>
+
     <string name="app_name">Weather</string>
 
     <string name="shared_pref">shared_pref_weather_app</string>

@@ -8,11 +8,11 @@ import com.mlsdev.weather.model.WeatherList;
  */
 public interface BaseWeatherListener {
 
-    public void onSuccessGetWeatherByCity(Weather weather);
+    void onSuccessGetWeatherByCity(Weather weather);
 
-    public void onErrorGetWeatherByCity(String error);
+    void onErrorGetWeatherByCity(String error);
 
-    public void onSuccessGetAllWeathers(WeatherList weatherList);
+    void onSuccessGetAllWeathers(WeatherList weatherList);
 
-    public void onErrorGetAllWeathers(String error);
+    void onErrorGetAllWeathers(String error);
 }
