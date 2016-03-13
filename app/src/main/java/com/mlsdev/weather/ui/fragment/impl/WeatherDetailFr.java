@@ -36,14 +36,24 @@ public class WeatherDetailFr extends Fragment implements IWeatherDetailFr {
 
     private WeatherDetailFrPresenter presenter = new WeatherDetailFrPresenter(this);
 
-    public WeatherDetailFr(Weather weather, DetailWeatherActivity activity) {
-        this.weather = weather;
-        this.activity = activity;
+    public WeatherDetailFr(){
+
+    }
+
+    public static WeatherDetailFr newInstance(Weather weather, DetailWeatherActivity activity) {
+        WeatherDetailFr fragment = new WeatherDetailFr();
+        Bundle args = new Bundle();
+        args.putSerializable("weather", weather);
+        args.putSerializable("activity", activity);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        weather = (Weather) getArguments().getSerializable("weather");
+        activity = (DetailWeatherActivity) getArguments().getSerializable("activity");
     }
 
     @Override

@@ -20,6 +20,7 @@ import com.mlsdev.weather.presenter.WeatherDetailFrPresenter;
 import com.mlsdev.weather.services.impl.ServiceManager;
 import com.mlsdev.weather.ui.fragment.impl.WeatherDetailFr;
 
+import java.io.Serializable;
 import java.util.List;
 
 import mlsdev.com.weather.R;
@@ -27,7 +28,7 @@ import mlsdev.com.weather.R;
 /**
  * Created by romakukhar on 05.02.15.
  */
-public class DetailWeatherActivity extends BaseActivity {
+public class DetailWeatherActivity extends BaseActivity implements Serializable {
 
     private static int PAGES_NUMBER;
     private List<Weather> weatherList;
@@ -95,7 +96,7 @@ public class DetailWeatherActivity extends BaseActivity {
         @Override
         public Fragment getItem(int position) {
             Weather weather = weatherList.get(position);
-            return new WeatherDetailFr(weather, getActivity());
+            return WeatherDetailFr.newInstance(weather, getActivity());
         }
 
         @Override

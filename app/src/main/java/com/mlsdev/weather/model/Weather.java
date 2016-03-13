@@ -7,6 +7,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,7 +16,7 @@ import java.util.Date;
  */
 
 @DatabaseTable(tableName = "weather")
-public class Weather {
+public class Weather implements Serializable{
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM hh:mm");
     private SimpleDateFormat dateHourFormat = new SimpleDateFormat("hh:mm");
