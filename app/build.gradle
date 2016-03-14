@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "mlsdev.com.weather"
+        applicationId "cooksdev.com.weather"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
