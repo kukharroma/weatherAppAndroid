@@ -2,8 +2,10 @@ package com.mlsdev.weather.ui.activity;
 
 import android.os.Bundle;
 
+import com.crashlytics.android.Crashlytics;
 import com.mlsdev.weather.ui.fragment.impl.WeatherListFr;
 
+import io.fabric.sdk.android.Fabric;
 import mlsdev.com.weather.R;
 
 /**
@@ -14,6 +16,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         showWeatherListFragment();
     }
 
